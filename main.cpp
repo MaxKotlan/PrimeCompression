@@ -4,7 +4,7 @@
 #include "printallsums.h"
 
 int main(int argc, char** argv){
-    uint32_t p = 17;
+    uint32_t p = 17;//(1 << 31)-1;
     uint32_t c = 3;
     uint32_t g = 1;
     std::cout << "Find all values of a and b such that a + b ≡ c mod p" << std::endl;
@@ -15,11 +15,20 @@ int main(int argc, char** argv){
     for (int i = 0; i < 10; i++)
         std::cout << p*i+c << ((i!=9)?", ":"...");
     std::cout << std::endl; 
-    for (uint32_t i = 0; i < 10; i++){
-        printallsums(p*i+c, g);
+    //std::cout << "e ≡ ";
+    //for (int i = 0; i < 10; i++)
+    //    std::cout << p*i+c+1 << ((i!=9)?", ":"...");
+    //std::cout << std::endl; 
+
+    for (uint32_t i = 0; i < 2; i++){
+        std::cout << "--" << c << "--" << std::endl;
+        printallsums(p*i+c, 1);
+        std::cout << std::endl << std::endl;
+        std::cout << "--" << c+1 << "--" << std::endl;
+        printallsums(p*i+c+1, 5);
         std::cout << std::endl << std::endl;
     }
 
-    std::vector<uint8_t> inputdata{'M', 'a', 'x'};
+    std::vector<uint8_t> inputdata{ 'M', 'b'};
     FieldSearch fs(&inputdata);
 }
