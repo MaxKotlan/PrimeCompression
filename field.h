@@ -26,6 +26,9 @@ class Field{
         void printChar(size_t range);
         bool containsAt(size_t index, std::vector<T> &elements);
         T inline getElement(T index) { return (_a*power(_g, index)+_b)%_p; };
+        void printElementFieldEquation(size_t index);
+        void printElementFieldEquationGXPrecomputed(T gx);
+        void printGeneralFieldEquation();
 
     private:
         /*Coefficents used to modify standard exponential fields*/
@@ -79,6 +82,23 @@ void Field<T>::printChar(size_t range){
         std::cout << (uint8_t)getElement(i) << " ";
     std::cout << std::endl;
 }
+
+template <class T>
+void Field<T>::printElementFieldEquation(size_t index){
+    std::cout << _a << " * " << _g << "^"<< index << " + " << _b << std::endl;
+}
+
+template <class T>
+void Field<T>::printElementFieldEquationGXPrecomputed(T gx){
+    std::cout << _a << " * " << gx << " + " << _b << std::endl;
+}
+
+
+template <class T>
+void Field<T>::printGeneralFieldEquation(){
+    std::cout << _a << " * " << _g << "^x + " << _b << std::endl;
+}
+
 
 template <class T>
 bool Field<T>::containsAt(size_t index, std::vector<T> &elements){
