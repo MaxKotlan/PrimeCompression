@@ -8,6 +8,7 @@ class FieldSearch{
         FieldSearch(T generator, T moduli) : _f(generator, moduli) { }
         void solutions(size_t index, T congruent);
         void printAllCoefficentCombinationsForSolution(size_t _index, uint64_t element);
+        void printAllSolutionsUntil(size_t index, T element, size_t max);
         void search(std::vector<T> &elements);
 
     private:
@@ -21,11 +22,17 @@ void FieldSearch<T>::printAllCoefficentCombinationsForSolution(size_t index, uin
         _f.setA(i);
         _f.setB(congruent-i*_gx);
         _f.printElementFieldEquation(index);
+        _f.printChar(17);
         //_f.printElementFieldEquationGXPrecomputed(_gx);
         //_f.printFieldEquation();
     }
 }
 
+template <class T>
+void FieldSearch<T>::printAllSolutionsUntil(size_t index, T element, size_t max){
+    for (size_t i = 0; i < max; i++)
+        printAllCoefficentCombinationsForSolution(index, _f.getModuli()*i+element);
+}
 
 template <class T>
 void FieldSearch<T>::solutions(size_t index, T element) {

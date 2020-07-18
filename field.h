@@ -85,7 +85,7 @@ void Field<T>::printChar(size_t range){
 
 template <class T>
 void Field<T>::printElementFieldEquation(size_t index){
-    std::cout << _a << " * " << _g << "^"<< index << " + " << _b << std::endl;
+    std::cout << _a << " * " << _g << "^"<< index << " + " << _b << "\t";
 }
 
 template <class T>
