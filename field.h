@@ -37,7 +37,7 @@ class Field{
         void printChar();
         void printChar(T offset, size_t range);
         bool containsAt(size_t index, std::vector<T> &elements);
-        T inline getElement(T index) { return ((_a*power_mod(_g, index,_p)+_b)%_p)%_subfield_p+_post_offset; };
+        T inline getElement(T index) { return ((_a*power_mod(_g, index,_p)+_b)%_p); };
         void printElementFieldEquation(size_t index);
         void printElementFieldEquationGXPrecomputed(T gx);
         void printGeneralFieldEquation();
@@ -50,9 +50,6 @@ class Field{
         /*Generator and moduli*/
         T _g;
         T _p;
-
-        T _subfield_p  = 26;
-        T _post_offset = 'A';
 };
 
 template <class T>
@@ -63,6 +60,8 @@ Field<T>::Field(T generator, T moduli, T a, T b) : _g(generator), _p(moduli), _a
 
 template <class T>
 void Field<T>::print(PrintSettings<T> psettings){
+    if(psettings.range==0)
+        psettings.range=size();
     switch(psettings.printmode){
         case PrintSettings<T>::PrintMode::Dec:
         print(psettings.offset, psettings.range);break;
@@ -120,7 +119,6 @@ template <class T>
 void Field<T>::printElementFieldEquationGXPrecomputed(T gx){
     std::cout << _a << " * " << gx << " + " << _b << std::endl;
 }
-
 
 template <class T>
 void Field<T>::printGeneralFieldEquation(){

@@ -24,8 +24,8 @@ void FieldSearch<T>::printAllEquations(size_t index, T element){
     //s %= _f.getModuli();
     //std::cout << s;
     PrintSettings<T> psettings{
-        .range=30,
-        .offset=index,
+        .range=5,
+        //.offset=index,
         .printmode=PrintSettings<T>::PrintMode::Char
     };
     std::vector<T> halt{ 'M', 'A' };
