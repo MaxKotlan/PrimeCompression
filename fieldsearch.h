@@ -23,28 +23,37 @@ void FieldSearch<T>::printAllEquations(size_t index, T element){
     //uint64_t s = element-1;
     //s %= _f.getModuli();
     //std::cout << s;
-    std::vector<T> halt{ 'M', 'a' }; 
+    PrintSettings<T> psettings{
+        .range=30,
+        .offset=index,
+        .printmode=PrintSettings<T>::PrintMode::Char
+    };
+    std::vector<T> halt{ 'M', 'A' };
     uint64_t p = _f.getModuli();
     uint64_t _gx = powermod(_f.getGenerator(), index, _f.getModuli());
     for (uint64_t a = 0; a < _f.getModuli(); a++){
         _f.setA(a);
-        //s-_gx*a;//(_gx-index)*a+element;//s-_gx*a; //**(_gx-1)*a%p +element;//-_gx*a;//_gx*a%p +element; //p*(p-element)+(element-a)%(p);
-        //std::cout << "("<<element << " - " << _gx << " * " << a << ")%"<<p<<" : ";
-        //std::cout << (7 - 9 * 1)%p << " ";
         uint64_t b = mod(element - mod(_gx*a,p),p);
         _f.setB(b);
         if (a%pollingrate==0){
             _f.printElementFieldEquation(index);
-            _f.printChar(30);
-            //_f.print(10);
-
+            _f.print(psettings);
         }
-        if (_f.containsAt(index, halt)){
-            std::cout << "Found at A: " << a << std::endl;
-            _f.printElementFieldEquation(index);
-            _f.printChar(10);
-            //exit(-1);
-        }
+        //static uint64_t prev = 0;
+        //if (_f.containsAt(index, halt)){
+        //    std::cout << "Found at A: " << a << std::endl;
+        //    _f.printElementFieldEquation(index);
+            //_f.printChar(10);
+            //static uint64_t count = 0;
+            //count++;
+            //if (prev != 0 && a-prev != 13){
+            //    std::cout << "DIVERGES! a:" << a << " : " << a-prev << std::endl;
+                //exit(-1);
+            //}
+            //prev = a;
+            //if (count == 10)
+            //    exit(-1);
+        //}
     }
     std::cout << "Search Complete" << std::endl;
 }

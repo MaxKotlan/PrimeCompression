@@ -1,9 +1,6 @@
 #include <iostream>
 #include "fieldsearch.h"
 
-uint64_t mod(uint64_t a, uint64_t b){
-    if (a < b) return a;
-}
 
 int main(int argc, char** argv){
     //FieldSearch<uint64_t>((1 << 30)-10, (1 << 31)-1).printAllEquations(1, 'M');//printAllCoefficentCombinationsForSolution(1, 20);
@@ -20,11 +17,12 @@ int main(int argc, char** argv){
         FieldSearch<uint64_t>(3, 17).printAllEquations(i, 7);//printAllCoefficentCombinationsForSolution(1, 20);
         std::cout <<  std::endl;
     }*/
-
-    FieldSearch<uint64_t>(14879879, (1 << 31)-1).printAllEquations(1, 'M');
+    std::cout << 'M'-'A' << std::endl;
+    FieldSearch<uint64_t>(3, (1 << 31)-1).printAllEquations(2, 'M'-'A');
     //FieldSearch<uint64_t>(3, 17).printAllEquations(2, 7);//printAllCoefficentCombinationsForSolution(1, 20);
 
     //Field<uint64_t> f(3, 17);
     //std::cout << std::endl;
     //f.print();
+    return 0;
 }

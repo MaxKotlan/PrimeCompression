@@ -5,6 +5,17 @@
 #include "fast_integer_exponentiation.h"
 
 template <class T>
+struct PrintSettings{
+    T range=0;
+    T offset=0;
+    enum PrintMode{
+        Dec,
+        Hex,
+        Char
+    } printmode=PrintMode::Dec;
+};
+
+template <class T>
 class Field{
     public:
         Field(T generator, T moduli);
@@ -18,14 +29,15 @@ class Field{
         void inline setA(T a) {_a = a;};
         void inline setB(T b) {_b = b;};
         size_t inline size() { return _p - 1; };
+        void print(PrintSettings<T> psettings);
         void print();
-        void print(size_t range);
+        void print(T offset, size_t range);
         void printHex();
-        void printHex(size_t range);
+        void printHex(T offset, size_t range);
         void printChar();
-        void printChar(size_t range);
+        void printChar(T offset, size_t range);
         bool containsAt(size_t index, std::vector<T> &elements);
-        T inline getElement(T index) { return (_a*power(_g, index)+_b)%_p; };
+        T inline getElement(T index) { return ((_a*power(_g, index)+_b)%_p)%_subfield_p+_post_offset; };
         void printElementFieldEquation(size_t index);
         void printElementFieldEquationGXPrecomputed(T gx);
         void printGeneralFieldEquation();
@@ -38,6 +50,9 @@ class Field{
         /*Generator and moduli*/
         T _g;
         T _p;
+
+        T _subfield_p  = 26;
+        T _post_offset = 'A';
 };
 
 template <class T>
@@ -47,40 +62,53 @@ template <class T>
 Field<T>::Field(T generator, T moduli, T a, T b) : _g(generator), _p(moduli), _a(a), _b(b) {};
 
 template <class T>
+void Field<T>::print(PrintSettings<T> psettings){
+    switch(psettings.printmode){
+        case PrintSettings<T>::PrintMode::Dec:
+        print(psettings.offset, psettings.range);break;
+        case PrintSettings<T>::PrintMode::Hex:
+        printHex(psettings.offset, psettings.range); break;
+        case PrintSettings<T>::PrintMode::Char:
+        printChar(psettings.offset, psettings.range);break;
+    }
+}
+
+
+template <class T>
 void Field<T>::print(){
-    print(size());
+    print(0,size());
 }
 
 template <class T>
 void Field<T>::printHex(){
-    printHex(size());
+    printHex(0,size());
 }
 
 template <class T>
 void Field<T>::printChar(){
-    printChar(size());
+    printChar(0,size());
 }
 
 template <class T>
-void Field<T>::print(size_t range){
-    for (size_t i = 0; i < range; i++)
+void Field<T>::print(T offset, size_t range){
+    for (size_t i = offset; i < offset+range; i++)
         std::cout << getElement(i) << " ";
-    std::cout << std::endl;
+    std::cout << (range==size()?"":"...") << std::endl;
 }
 
 template <class T>
-void Field<T>::printHex(size_t range){
+void Field<T>::printHex(T offset, size_t range){
     std::cout << std::hex << std::setw(2) << std::setfill('0');
-    for (size_t i = 0; i < range; i++)
+    for (size_t i = offset; i < offset+range; i++)
         std::cout << getElement(i) << " ";
-    std::cout << std::dec << std::endl;
+    std::cout << (range==size()?"":"...") << std::dec << std::endl;
 }
 
 template <class T>
-void Field<T>::printChar(size_t range){
-    for (size_t i = 0; i < range; i++)
+void Field<T>::printChar(T offset, size_t range){
+    for (size_t i = offset; i < offset+range; i++)
         std::cout << (uint8_t)getElement(i) << " ";
-    std::cout << std::endl;
+    std::cout << (range==size()?"":"...")<< std::endl;
 }
 
 template <class T>
@@ -104,7 +132,7 @@ template <class T>
 bool Field<T>::containsAt(size_t index, std::vector<T> &elements){
     bool match = true;
     for (size_t i = index; i < elements.size()+index; i++)
-        if (elements[i-index] != (T)getElement(i))
+        if (elements[i-index] != getElement(i))
             match = false;
     return match;
 }
