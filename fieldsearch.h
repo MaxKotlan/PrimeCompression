@@ -13,21 +13,40 @@ class FieldSearch{
         void search(std::vector<T> &elements);
 
     private:
+        uint64_t pollingrate = 1;
         Field<T> _f;
 };
 
 template <class T>
 void FieldSearch<T>::printAllEquations(size_t index, T element){
     uint64_t s = (_f.getModuli()*(_f.getModuli()-1)+element);
-    for (uint64_t a = 0; a <= _f.getModuli()-1; a++){
-        T _gx = powermod(_f.getGenerator(), index, _f.getModuli());
+    //uint64_t s = element-1;
+    //s %= _f.getModuli();
+    //std::cout << s;
+    std::vector<T> halt{ 'M', 'a' }; 
+    uint64_t p = _f.getModuli();
+    uint64_t _gx = powermod(_f.getGenerator(), index, _f.getModuli());
+    for (uint64_t a = 0; a < _f.getModuli(); a++){
         _f.setA(a);
-        _f.setB((s-a*_gx)%_f.getModuli());
-        _f.printElementFieldEquation(index);
-        _f.printHex();
-        //_f.printElementFieldEquationGXPrecomputed(_gx);
-        //_f.printFieldEquation();
+        //s-_gx*a;//(_gx-index)*a+element;//s-_gx*a; //**(_gx-1)*a%p +element;//-_gx*a;//_gx*a%p +element; //p*(p-element)+(element-a)%(p);
+        //std::cout << "("<<element << " - " << _gx << " * " << a << ")%"<<p<<" : ";
+        //std::cout << (7 - 9 * 1)%p << " ";
+        uint64_t b = mod(element - mod(_gx*a,p),p);
+        _f.setB(b);
+        if (a%pollingrate==0){
+            _f.printElementFieldEquation(index);
+            _f.printChar(30);
+            //_f.print(10);
+
+        }
+        if (_f.containsAt(index, halt)){
+            std::cout << "Found at A: " << a << std::endl;
+            _f.printElementFieldEquation(index);
+            _f.printChar(10);
+            //exit(-1);
+        }
     }
+    std::cout << "Search Complete" << std::endl;
 }
 
 template <class T>
