@@ -37,7 +37,7 @@ class Field{
         void printChar();
         void printChar(T offset, size_t range);
         bool containsAt(size_t index, std::vector<T> &elements);
-        T inline getElement(T index) { return ((_a*power(_g, index)+_b)%_p)%_subfield_p+_post_offset; };
+        T inline getElement(T index) { return ((_a*power_mod(_g, index,_p)+_b)%_p)%_subfield_p+_post_offset; };
         void printElementFieldEquation(size_t index);
         void printElementFieldEquationGXPrecomputed(T gx);
         void printGeneralFieldEquation();

@@ -17,6 +17,23 @@ uint64_t power(uint64_t x, uint64_t y)
 	return res;
 }
 
+uint64_t power_mod(uint64_t x, uint64_t y, uint64_t p)
+{
+	uint64_t res = 1;     // Initialize result 
+
+	while (y > 0)
+	{
+		// If y is odd, multiply x with result 
+		if (y & 1)
+			res = (res%p * x%p)%p;
+
+		// y must be even now 
+		y = (y >> 1)%p; // y = y/2 
+		x = ((x%p) * (x%p))%p;  // Change x to x^2 
+	}
+	return res;
+}
+
 uint64_t powermod(uint64_t x, uint64_t y, uint64_t p){
-	return power(x,y)%p;
+	return power(x,y);
 }

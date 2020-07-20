@@ -18,7 +18,7 @@ int main(int argc, char** argv){
         std::cout <<  std::endl;
     }*/
     std::cout << 'M'-'A' << std::endl;
-    FieldSearch<uint64_t>(3, (1 << 31)-1).printAllEquations(2, 'M'-'A');
+    FieldSearch<uint64_t>(3, (1 << 31)-1).printAllEquations(30, 'M'-'A');
     //FieldSearch<uint64_t>(3, 17).printAllEquations(2, 7);//printAllCoefficentCombinationsForSolution(1, 20);
 
     //Field<uint64_t> f(3, 17);
