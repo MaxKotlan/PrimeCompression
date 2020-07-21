@@ -6,6 +6,7 @@ template <class T>
 class FieldSearch{
     public:
         FieldSearch(T generator, T moduli) : _f(generator, moduli) { }
+        void setPrintSettings(PrintSettings<T> psettings) { _printsettings = psettings; }
         void solutions(size_t index, T congruent);
         void printAllEquations(size_t index, T element);
         void printAllCoefficentCombinationsForSolution(size_t _index, uint64_t element);
@@ -13,6 +14,7 @@ class FieldSearch{
         void search(std::vector<T> &elements);
 
     private:
+        PrintSettings<T> _printsettings;
         uint64_t pollingrate = 1;
         Field<T> _f;
 };
@@ -23,11 +25,6 @@ void FieldSearch<T>::printAllEquations(size_t index, T element){
     //uint64_t s = element-1;
     //s %= _f.getModuli();
     //std::cout << s;
-    PrintSettings<T> psettings{
-        .range=5,
-        //.offset=index,
-        .printmode=PrintSettings<T>::PrintMode::Char
-    };
     std::vector<T> halt{ 'M', 'A' };
     uint64_t p = _f.getModuli();
     uint64_t _gx = powermod(_f.getGenerator(), index, _f.getModuli());
@@ -37,7 +34,7 @@ void FieldSearch<T>::printAllEquations(size_t index, T element){
         _f.setB(b);
         if (a%pollingrate==0){
             _f.printElementFieldEquation(index);
-            _f.print(psettings);
+            _f.print(_printsettings);
         }
         //static uint64_t prev = 0;
         //if (_f.containsAt(index, halt)){

@@ -8,6 +8,8 @@ template <class T>
 struct PrintSettings{
     T range=0;
     T offset=0;
+    T post_offset=0;
+    T subfield=256;
     enum PrintMode{
         Dec,
         Hex,
@@ -29,18 +31,17 @@ class Field{
         void inline setA(T a) {_a = a;};
         void inline setB(T b) {_b = b;};
         size_t inline size() { return _p - 1; };
-        void print(PrintSettings<T> psettings);
-        void print();
-        void print(T offset, size_t range);
-        void printHex();
-        void printHex(T offset, size_t range);
-        void printChar();
-        void printChar(T offset, size_t range);
+        void print(PrintSettings<T> &psettings);
         bool containsAt(size_t index, std::vector<T> &elements);
         T inline getElement(T index) { return ((_a*power_mod(_g, index,_p)+_b)%_p); };
         void printElementFieldEquation(size_t index);
         void printElementFieldEquationGXPrecomputed(T gx);
         void printGeneralFieldEquation();
+
+    protected:
+        void printDec(PrintSettings<T> &psettings);
+        void printHex(PrintSettings<T> &psettings);
+        void printChar(PrintSettings<T> &psettings);
 
     private:
         /*Coefficents used to modify standard exponential fields*/
@@ -59,55 +60,39 @@ template <class T>
 Field<T>::Field(T generator, T moduli, T a, T b) : _g(generator), _p(moduli), _a(a), _b(b) {};
 
 template <class T>
-void Field<T>::print(PrintSettings<T> psettings){
+void Field<T>::print(PrintSettings<T> &psettings){
     if(psettings.range==0)
         psettings.range=size();
     switch(psettings.printmode){
         case PrintSettings<T>::PrintMode::Dec:
-        print(psettings.offset, psettings.range);break;
+        printDec(psettings);break;
         case PrintSettings<T>::PrintMode::Hex:
-        printHex(psettings.offset, psettings.range); break;
+        printHex(psettings); break;
         case PrintSettings<T>::PrintMode::Char:
-        printChar(psettings.offset, psettings.range);break;
+        printChar(psettings);break;
     }
 }
 
-
 template <class T>
-void Field<T>::print(){
-    print(0,size());
+void Field<T>::printDec(PrintSettings<T> &psettings){
+    for (size_t i = psettings.offset; i < psettings.offset+psettings.range; i++)
+        std::cout << ((getElement(i)%psettings.subfield)+psettings.post_offset) << " ";
+    std::cout << (psettings.range==size()?"":"...") << std::endl;
 }
 
 template <class T>
-void Field<T>::printHex(){
-    printHex(0,size());
-}
-
-template <class T>
-void Field<T>::printChar(){
-    printChar(0,size());
-}
-
-template <class T>
-void Field<T>::print(T offset, size_t range){
-    for (size_t i = offset; i < offset+range; i++)
-        std::cout << getElement(i) << " ";
-    std::cout << (range==size()?"":"...") << std::endl;
-}
-
-template <class T>
-void Field<T>::printHex(T offset, size_t range){
+void Field<T>::printHex(PrintSettings<T> &psettings){
     std::cout << std::hex << std::setw(2) << std::setfill('0');
-    for (size_t i = offset; i < offset+range; i++)
-        std::cout << getElement(i) << " ";
-    std::cout << (range==size()?"":"...") << std::dec << std::endl;
+    for (size_t i = psettings.offset; i < psettings.offset+psettings.range; i++)
+        std::cout << ((getElement(i)%psettings.subfield)+psettings.post_offset) << " ";
+    std::cout << (psettings.range==size()?"":"...") << std::dec << std::endl;
 }
 
 template <class T>
-void Field<T>::printChar(T offset, size_t range){
-    for (size_t i = offset; i < offset+range; i++)
-        std::cout << (uint8_t)getElement(i) << " ";
-    std::cout << (range==size()?"":"...")<< std::endl;
+void Field<T>::printChar(PrintSettings<T> &psettings){
+    for (size_t i = psettings.offset; i < psettings.offset+psettings.range; i++)
+        std::cout << (uint8_t)((getElement(i)%psettings.subfield)+psettings.post_offset) << " ";
+    std::cout << (psettings.range==size()?"":"...")<< std::endl;
 }
 
 template <class T>

@@ -1,6 +1,22 @@
 #include <iostream>
 #include "fieldsearch.h"
 
+void testlarge(){
+    FieldSearch<uint64_t> fs(3, (1 << 31)-1);
+    fs.setPrintSettings({
+        .range=30,
+        .offset=0,
+        .post_offset='A',
+        .subfield=26,
+        .printmode=PrintSettings<uint64_t>::PrintMode::Char   
+    });
+    fs.printAllEquations(0, 'M'-'A');
+}
+
+void testsmall(){
+    FieldSearch<uint64_t> fs(3, 17);
+    fs.printAllEquations(2, 7);
+}
 
 int main(int argc, char** argv){
     //FieldSearch<uint64_t>((1 << 30)-10, (1 << 31)-1).printAllEquations(1, 'M');//printAllCoefficentCombinationsForSolution(1, 20);
@@ -17,7 +33,8 @@ int main(int argc, char** argv){
         std::cout <<  std::endl;
     }*/
     //std::cout << 'M'-'A' << std::endl;
-    FieldSearch<uint64_t>(3, (1 << 31)-1).printAllEquations(2, 'M');
+    //FieldSearch<uint64_t>(3, (1 << 31)-1).printAllEquations(2, 'M');
+    testlarge();
     //FieldSearch<uint64_t>(3, 17).printAllEquations(2, 7);//printAllCoefficentCombinationsForSolution(1, 20);
 
     //Field<uint64_t> f(3, 17);
