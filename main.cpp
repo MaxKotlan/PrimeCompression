@@ -1,24 +1,29 @@
 #include <iostream>
+#include <boost/multiprecision/gmp.hpp>
 #include "fieldsearch.h"
 
+
 void testlarge(){
-    FieldSearch<uint64_t> fs(3, (1 << 31)-1);
+    FieldSearch fs(3, (1 << 31)-1);
     fs.setPrintSettings({
         .range=30,
         .offset=0,
         .post_offset='A',
         .subfield=26,
-        .printmode=PrintSettings<uint64_t>::PrintMode::Char   
+        .printmode=PrintSettings::PrintMode::Char   
     });
     fs.printAllEquations(0, 'M'-'A');
 }
 
 void testsmall(){
-    FieldSearch<uint64_t> fs(3, 17);
+    FieldSearch fs(3, 17);
     fs.printAllEquations(2, 7);
 }
 
 int main(int argc, char** argv){
+    using namespace boost::multiprecision;
+    //mpz_int v = 1;
+    
     //FieldSearch<uint64_t>((1 << 30)-10, (1 << 31)-1).printAllEquations(1, 'M');//printAllCoefficentCombinationsForSolution(1, 20);
     //std::cout << (uint64_t)(-1)% << std::endl;
     //uint64_t primes[]={2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
@@ -34,6 +39,7 @@ int main(int argc, char** argv){
     }*/
     //std::cout << 'M'-'A' << std::endl;
     //FieldSearch<uint64_t>(3, (1 << 31)-1).printAllEquations(2, 'M');
+    //testsmall();
     testlarge();
     //FieldSearch<uint64_t>(3, 17).printAllEquations(2, 7);//printAllCoefficentCombinationsForSolution(1, 20);
 

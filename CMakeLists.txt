@@ -1,5 +1,18 @@
 cmake_minimum_required (VERSION 2.8.11)
 project (PrimeCompression)
 set(CMAKE_CXX_FLAGS "-O3")
-add_executable (primecompression main.cpp fast_integer_exponentiation.cpp)
-add_executable (primecompression-tests "test/element/add.cpp")
+
+set(Boost_USE_STATIC_LIBS OFF) 
+set(Boost_USE_MULTITHREADED ON)  
+set(Boost_USE_STATIC_RUNTIME OFF) 
+find_package(Boost REQUIRED) 
+
+if(Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS}) 
+
+    add_executable (primecompression main.cpp fast_integer_exponentiation.cpp)
+    target_link_libraries(primecompression gmp)
+    add_executable (primecompression-tests "test/element/add.cpp")
+    #target_link_libraries(primecompression-tests Boost)
+
+endif()
