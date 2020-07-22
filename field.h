@@ -42,13 +42,13 @@ class Field{
         void inline setB(gmp::mpz_int &b) {_b = b;};
         gmp::mpz_int inline size() { return _p - 1; };
         void print(PrintSettings &psettings);
-        bool containsAt(gmp::mpz_int index, std::vector<gmp::mpz_int> &elements);
+        bool containsAt(gmp::mpz_int &index, std::vector<gmp::mpz_int> &elements);
         gmp::mpz_int getElement(gmp::mpz_int index) {
             gmp::mpz_int k = gmp::powm(_g, index,_p); 
             return ((_a * k+_b)%_p); 
         };
-        void printElementFieldEquation(gmp::mpz_int index);
-        void printElementFieldEquationGXPrecomputed(gmp::mpz_int gx);
+        void printElementFieldEquation(gmp::mpz_int &index);
+        void printElementFieldEquationGXPrecomputed(gmp::mpz_int &gx);
         void printGeneralFieldEquation();
 
     protected:
@@ -100,19 +100,19 @@ void Field::printChar(PrintSettings &psettings){
     std::cout << (psettings.range==size()?"":"...")<< std::endl;
 }
 
-void Field::printElementFieldEquation(gmp::mpz_int index){
+void Field::printElementFieldEquation(gmp::mpz_int &index){
     std::cout << _a << " * " << _g << " ^ "<< index << " + " << _b << "\t";
 }
 
-void Field::printElementFieldEquationGXPrecomputed(gmp::mpz_int gx){
-    std::cout << _a << " * " << gx << " + " << _b << std::endl;
+void Field::printElementFieldEquationGXPrecomputed(gmp::mpz_int &gx){
+    std::cout << _a << " * " << gx << " + " << _b << "\t";
 }
 
 void Field::printGeneralFieldEquation(){
-    std::cout << _a << " * " << _g << "^x + " << _b << std::endl;
+    std::cout << _a << " * " << _g << "^x + " << _b << "\t";
 }
 
-bool Field::containsAt(gmp::mpz_int index, std::vector<gmp::mpz_int> &elements){
+bool Field::containsAt(gmp::mpz_int &index, std::vector<gmp::mpz_int> &elements){
     bool match = true;
     for (gmp::mpz_int i = index; i < elements.size()+index; i++)
         if (elements[(size_t)(i-index)] != (getElement(i)%26))
