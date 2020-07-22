@@ -6,10 +6,11 @@ using namespace gmp;
 
 void SearchLarge(){
     Field field({
-        .generator=mpz_int("13999874411123227675658912014"),
-        .moduli=mpz_int("4776913109852041418248056622882488319")
+        .generator=3,//mpz_int("13999874411123227675658912014"),
+        .moduli=97//mpz_int("4776913109852041418248056622882488319")
     });
     FieldSearch fs(field);
+    /*
     fs.SetPrintSettings({
         .range=15,
         .offset=0,
@@ -17,18 +18,32 @@ void SearchLarge(){
         .subfield=26,
         .equationformat=PrintSettings::GX,
         .printmode=PrintSettings::PrintMode::Char   
-    });
+    });*/
 
     fs.Search({
+        .index=1,
+        .pollingrate=1,
+        .printnonmatches=true,
         .targets={
             Target{
-                .data={ 'C', 'L', 'A', 'Y', 'J'},
-                .normalize=true,
-            },
-            Target{
-                .data={ 'C', 'L', 'A', 'Y', 'J', 'A', 'M', 'E', 'S'},
+                .data={ 'M', 'A' },
                 .normalize=true,
                 .halt=false
+            },
+            Target{
+                .data={ 'M', 'A', 'X', 'W'},
+                .normalize=true,
+                .halt=true
+            }
+        },
+        .printsettings={
+            PrintSettings{
+                .range=15,
+                .offset=0,
+                .post_offset='A',
+                .subfield=26,
+                .equationformat=PrintSettings::GX,
+                .printmode=PrintSettings::PrintMode::Char   
             }
         }
     });
@@ -40,14 +55,17 @@ void SearchSmall(){
         .moduli=17
     });
     FieldSearch fs(field);
-    fs.SetPrintSettings({
-        .post_offset='0',
-        .printmode=PrintSettings::PrintMode::Char   
-    });
     fs.Search({
+        .index=0,
         .targets={
             Target{
                 .data={7}
+            }
+        },
+        .printsettings={
+            PrintSettings{
+                .post_offset='0',
+                .printmode=PrintSettings::PrintMode::Char   
             }
         }
     });
