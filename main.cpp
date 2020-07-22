@@ -7,13 +7,25 @@ using namespace gmp;
 void testlarge(){
     FieldSearch fs(mpz_int("13999874411123227675658912014"), mpz_int("4776913109852041418248056622882488319"));//(1 << 31)-1);
     fs.setPrintSettings({
-        .range=30,
-        .offset=mpz_int("8142738243748"),
+        .range=15,
+        .offset=0,
         .post_offset='A',
         .subfield=26,
         .printmode=PrintSettings::PrintMode::Char   
     });
-    fs.printAllEquations(mpz_int("8142738243748"), 'M'-'A');
+    Target t1, t2;
+    t1.normalize = true;
+    t1.data = std::move(std::vector<mpz_int>{'C', 'L', 'A', 'Y', 'J'});
+    t2.normalize = true;
+    t2.halt = true;
+    t2.data = std::move(std::vector<mpz_int>{'C', 'L', 'A', 'Y', 'J', 'A', 'M', 'E', 'S'});
+
+    fs.printAllEquations({
+        .targets={
+            t1,
+            t2
+        }
+    });
 }
 
 void testsmall(){
@@ -22,7 +34,13 @@ void testsmall(){
         .post_offset='0',
         .printmode=PrintSettings::PrintMode::Char   
     });
-    fs.printAllEquations(2, 7);
+
+    /*
+    fs.printAllEquations({
+        .targets={
+            t
+        }
+    });*/
 }
 
 int main(int argc, char** argv){

@@ -93,7 +93,7 @@ void Field::printChar(PrintSettings &psettings){
 }
 
 void Field::printElementFieldEquation(gmp::mpz_int index){
-    std::cout << _a << " * " << _g << "^"<< index << " + " << _b << "\t";
+    std::cout << _a << " * " << _g << " ^ "<< index << " + " << _b << "\t";
 }
 
 void Field::printElementFieldEquationGXPrecomputed(gmp::mpz_int gx){
