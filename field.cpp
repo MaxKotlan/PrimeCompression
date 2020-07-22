@@ -46,10 +46,10 @@ void Field::printGeneralFieldEquation(){
     std::cout << _a << " * " << _g << "^x + " << _b << "\t";
 }
 
-bool Field::containsAt(gmp::mpz_int &index, std::vector<gmp::mpz_int> &elements){
+bool Field::containsAt(gmp::mpz_int &index, std::vector<gmp::mpz_int> &elements, gmp::mpz_int &subfield){
     bool match = true;
     for (gmp::mpz_int i = index; i < elements.size()+index; i++)
-        if (elements[(size_t)(i-index)] != (getElement(i)%26))
+        if (elements[(size_t)(i-index)] != (getElement(i)%subfield))
             match = false;
     return match;
 }

@@ -42,7 +42,7 @@ class Field{
         void inline setB(gmp::mpz_int &b) {_b = b;};
         gmp::mpz_int inline size() { return _p - 1; };
         void print(PrintSettings &psettings);
-        bool containsAt(gmp::mpz_int &index, std::vector<gmp::mpz_int> &elements);
+        bool containsAt(gmp::mpz_int &index, std::vector<gmp::mpz_int> &elements, gmp::mpz_int &subfield);
         gmp::mpz_int getElement(gmp::mpz_int index) {
             gmp::mpz_int k = gmp::powm(_g, index,_p); 
             return ((_a * k+_b)%_p); 
