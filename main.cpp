@@ -13,9 +13,11 @@ void testlarge(){
         .subfield=26,
         .printmode=PrintSettings::PrintMode::Char   
     });
-    Target t1, t2;
+    Target t1, t2, t3;
     t1.normalize = true;
     t1.data = std::move(std::vector<mpz_int>{'C', 'L', 'A', 'Y', 'J'});
+    //t3.normalize = true;
+    //t3.data = std::move(std::vector<mpz_int>{'C', 'L'});
     t2.normalize = true;
     t2.halt = true;
     t2.data = std::move(std::vector<mpz_int>{'C', 'L', 'A', 'Y', 'J', 'A', 'M', 'E', 'S'});
@@ -23,6 +25,7 @@ void testlarge(){
     fs.printAllEquations({
         .targets={
             t1,
+            //t3,
             t2
         }
     });
