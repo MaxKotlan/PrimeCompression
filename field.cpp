@@ -22,9 +22,8 @@ void Field::printDec(PrintSettings &psettings){
 }
 
 void Field::printHex(PrintSettings &psettings){
-    std::cout << std::hex << std::setw(2) << std::setfill('0');
     for (gmp::mpz_int i = psettings.offset; i < psettings.offset+psettings.range; i++)
-        std::cout << std::setfill('0') << std::setw( 64 ) << std::hex  << ((getElement(i)%psettings.subfield)+psettings.post_offset) << " ";
+        std::cout << std::setfill(' ') << std::setw( 2 ) << std::hex  << ((getElement(i)%psettings.subfield)+psettings.post_offset) << " ";
     std::cout << (psettings.range==size()?"":"...") << std::dec << std::endl;
 }
 
