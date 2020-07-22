@@ -15,6 +15,7 @@ void SearchLarge(){
         .offset=0,
         .post_offset='A',
         .subfield=26,
+        .equationformat=PrintSettings::GX,
         .printmode=PrintSettings::PrintMode::Char   
     });
 

@@ -46,15 +46,17 @@ void FieldSearch::Search(SearchSettings ssettings){
     gmp::mpz_int s = (_f.getModuli()*(_f.getModuli()-1)+initalelement);
     gmp::mpz_int p = _f.getModuli();
     gmp::mpz_int _gx = gmp::powm(_f.getGenerator(), ssettings.index, _f.getModuli());
-    for (gmp::mpz_int a("0"); a < _f.getModuli(); a++){
+    for (gmp::mpz_int a(0); a < _f.getModuli(); a++){
         _f.setA(a);
         gmp::mpz_int b = (s - _gx*a)%p;
         _f.setB(b);
         if (a%ssettings.pollingrate==0 && ssettings.printnonmatches){
-            _f.printElementFieldEquation(ssettings.index);
+            switch(_printsettings.equationformat) {
+                case PrintSettings::EquationFormat::GX: _f.printElementFieldEquationGXPrecomputed(_gx); break; 
+                case PrintSettings::GPowerX:            _f.printElementFieldEquation(ssettings.index); break;
+            }
             _f.print(_printsettings);
         }
-        //static gmp::mpz_int prev = 0;
         for (Target &targ : ssettings.targets){
             if (_f.containsAt(ssettings.index, targ.data)){
                 std::cout << "Found at: ";

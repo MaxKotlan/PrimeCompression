@@ -11,6 +11,10 @@ struct PrintSettings{
     gmp::mpz_int offset=0;
     gmp::mpz_int post_offset=0;
     gmp::mpz_int subfield=256;
+    enum EquationFormat{
+        GX,
+        GPowerX
+    } equationformat=EquationFormat::GX;
     enum PrintMode{
         Dec,
         Hex,
@@ -28,15 +32,14 @@ struct FieldParameters{
 class Field{
     public:
         Field(FieldParameters fieldparameters);
-        //Field(gmp::mpz_int generator, gmp::mpz_int moduli, gmp::mpz_int a, gmp::mpz_int b);
 
-        void inline setCoefficents(gmp::mpz_int a, gmp::mpz_int b) { _a = a; _b = b; }
+        void inline setCoefficents(gmp::mpz_int &a, gmp::mpz_int &b) { _a = a; _b = b; }
         gmp::mpz_int inline getModuli() { return _p; };
         gmp::mpz_int inline getGenerator() { return _g; };
         gmp::mpz_int inline getA() { return _a; };
         gmp::mpz_int inline getB() { return _b; };
-        void inline setA(gmp::mpz_int a) {_a = a;};
-        void inline setB(gmp::mpz_int b) {_b = b;};
+        void inline setA(gmp::mpz_int &a) {_a = a;};
+        void inline setB(gmp::mpz_int &b) {_b = b;};
         gmp::mpz_int inline size() { return _p - 1; };
         void print(PrintSettings &psettings);
         bool containsAt(gmp::mpz_int index, std::vector<gmp::mpz_int> &elements);
@@ -64,8 +67,6 @@ class Field{
 };
 
 Field::Field(FieldParameters fieldparameters) : _g(fieldparameters.generator), _p(fieldparameters.moduli), _a(fieldparameters.coefficenta), _b(fieldparameters.coefficentb) {};
-
-//Field::Field(gmp::mpz_int generator, gmp::mpz_int moduli, gmp::mpz_int a, gmp::mpz_int b) : _g(generator), _p(moduli), _a(a), _b(b) {};
 
 void Field::print(PrintSettings &psettings){
     if(psettings.range==0)
