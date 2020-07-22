@@ -18,10 +18,17 @@ struct PrintSettings{
     } printmode=PrintMode::Dec;
 };
 
+struct FieldParameters{
+    gmp::mpz_int generator=1;
+    gmp::mpz_int moduli=1;
+    gmp::mpz_int coefficenta=1;
+    gmp::mpz_int coefficentb=0;
+};
+
 class Field{
     public:
-        Field(gmp::mpz_int generator, gmp::mpz_int moduli);
-        Field(gmp::mpz_int generator, gmp::mpz_int moduli, gmp::mpz_int a, gmp::mpz_int b);
+        Field(FieldParameters fieldparameters);
+        //Field(gmp::mpz_int generator, gmp::mpz_int moduli, gmp::mpz_int a, gmp::mpz_int b);
 
         void inline setCoefficents(gmp::mpz_int a, gmp::mpz_int b) { _a = a; _b = b; }
         gmp::mpz_int inline getModuli() { return _p; };
@@ -56,9 +63,9 @@ class Field{
         gmp::mpz_int _p;
 };
 
-Field::Field(gmp::mpz_int generator, gmp::mpz_int moduli) : _g(generator), _p(moduli), _a(1), _b(0) {};
+Field::Field(FieldParameters fieldparameters) : _g(fieldparameters.generator), _p(fieldparameters.moduli), _a(fieldparameters.coefficenta), _b(fieldparameters.coefficentb) {};
 
-Field::Field(gmp::mpz_int generator, gmp::mpz_int moduli, gmp::mpz_int a, gmp::mpz_int b) : _g(generator), _p(moduli), _a(a), _b(b) {};
+//Field::Field(gmp::mpz_int generator, gmp::mpz_int moduli, gmp::mpz_int a, gmp::mpz_int b) : _g(generator), _p(moduli), _a(a), _b(b) {};
 
 void Field::print(PrintSettings &psettings){
     if(psettings.range==0)
