@@ -1,6 +1,5 @@
 #pragma once
 #include "field.h"
-#include "fast_integer_exponentiation.h"
 
 class FieldSearch{
     public:
@@ -14,7 +13,7 @@ class FieldSearch{
 
     private:
         PrintSettings _printsettings;
-        gmp::mpz_int pollingrate = 1;
+        gmp::mpz_int pollingrate = 1000000;
         Field _f;
 };
 
@@ -23,21 +22,23 @@ void FieldSearch::printAllEquations(gmp::mpz_int index, gmp::mpz_int element){
     //gmp::mpz_int s = element-1;
     //s %= _f.getModuli();
     //std::cout << s;
-    std::vector<gmp::mpz_int> halt{ 'M'-'A', 'A'-'A' };
+    std::vector<gmp::mpz_int> halt{ 'M'-'A','A'-'A', 'X' - 'A', 'W'-'A', 'E'-'A'};//, 'L'-'A', 'L'-'A'};//, 'L'-'A'};//, 'L'-'A' };
     gmp::mpz_int p = _f.getModuli();
     gmp::mpz_int _gx = gmp::powm(_f.getGenerator(), index, _f.getModuli());
     for (gmp::mpz_int a = 0; a < _f.getModuli(); a++){
         _f.setA(a);
-        gmp::mpz_int b = (element + gmp::mpz_int(-1)%p* _gx*a)%p;
+        gmp::mpz_int b = (s - _gx*a)%p;
         _f.setB(b);
-        if (a%pollingrate==0){
+        if (a%pollingrate==0 && true){
             _f.printElementFieldEquation(index);
             _f.print(_printsettings);
         }
         //static gmp::mpz_int prev = 0;
         if (_f.containsAt(index, halt)){
-            std::cout << "Found at A: " << a << std::endl;
+            std::cout << "Found at: " << a << " ";
             _f.printElementFieldEquation(index);
+            _f.print(_printsettings);
+            std::cout << std::endl;
             //_f.printChar(10);
             //static gmp::mpz_int count = 0;
             //count++;
@@ -47,7 +48,7 @@ void FieldSearch::printAllEquations(gmp::mpz_int index, gmp::mpz_int element){
             //}
             //prev = a;
             //if (count == 10)
-                exit(-1);
+            //    exit(-1);
         }
     }
     std::cout << "Search Complete" << std::endl;

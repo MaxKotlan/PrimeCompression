@@ -2,21 +2,26 @@
 #include <boost/multiprecision/gmp.hpp>
 #include "fieldsearch.h"
 
+using namespace gmp;
 
 void testlarge(){
-    FieldSearch fs(3, (1 << 31)-1);
+    FieldSearch fs(mpz_int("13999874411123227675658912014"), mpz_int("4776913109852041418248056622882488319"));//(1 << 31)-1);
     fs.setPrintSettings({
         .range=30,
-        .offset=0,
+        .offset=mpz_int("8142738243748"),
         .post_offset='A',
         .subfield=26,
         .printmode=PrintSettings::PrintMode::Char   
     });
-    fs.printAllEquations(0, 'M'-'A');
+    fs.printAllEquations(mpz_int("8142738243748"), 'M'-'A');
 }
 
 void testsmall(){
     FieldSearch fs(3, 17);
+    fs.setPrintSettings({
+        .post_offset='0',
+        .printmode=PrintSettings::PrintMode::Char   
+    });
     fs.printAllEquations(2, 7);
 }
 

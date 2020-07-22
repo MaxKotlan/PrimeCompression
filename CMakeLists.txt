@@ -10,9 +10,9 @@ find_package(Boost REQUIRED)
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS}) 
 
-    add_executable (primecompression main.cpp fast_integer_exponentiation.cpp)
+    add_executable (primecompression main.cpp)
     target_link_libraries(primecompression gmp)
-    add_executable (primecompression-tests "test/element/add.cpp")
+    #add_executable (primecompression-tests "test/element/add.cpp")
     #target_link_libraries(primecompression-tests Boost)
 
 endif()

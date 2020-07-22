@@ -3,7 +3,6 @@
 #include <vector>
 #include <iomanip>
 #include <boost/multiprecision/gmp.hpp>
-#include "fast_integer_exponentiation.h"
 
 namespace gmp = boost::multiprecision;
 
@@ -83,7 +82,7 @@ void Field::printDec(PrintSettings &psettings){
 void Field::printHex(PrintSettings &psettings){
     std::cout << std::hex << std::setw(2) << std::setfill('0');
     for (gmp::mpz_int i = psettings.offset; i < psettings.offset+psettings.range; i++)
-        std::cout << ((getElement(i)%psettings.subfield)+psettings.post_offset) << " ";
+        std::cout << std::setfill('0') << std::setw( 64 ) << std::hex  << ((getElement(i)%psettings.subfield)+psettings.post_offset) << " ";
     std::cout << (psettings.range==size()?"":"...") << std::dec << std::endl;
 }
 
@@ -108,7 +107,7 @@ void Field::printGeneralFieldEquation(){
 bool Field::containsAt(gmp::mpz_int index, std::vector<gmp::mpz_int> &elements){
     bool match = true;
     for (gmp::mpz_int i = index; i < elements.size()+index; i++)
-        if (elements[(size_t)(i-index)] != getElement(i))
+        if (elements[(size_t)(i-index)] != (getElement(i)%26))
             match = false;
     return match;
 }
