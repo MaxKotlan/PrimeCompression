@@ -15,7 +15,7 @@ void SearchLarge(){
         .a_offset=0,
         .index=0,
         .pollingrate=1000000,
-        .printmatches=false,
+        .printmatches=true,
         .printnonmatches=true,
         .targets={
             Target{

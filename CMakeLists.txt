@@ -10,7 +10,7 @@ find_package(Boost REQUIRED)
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS}) 
 
-    add_executable (primecompression main.cpp fieldsearch.cpp field.cpp actions/print.cpp)
+    add_executable (primecompression main.cpp fieldsearch.cpp field.cpp actions/print.cpp actions/match.cpp)
     target_link_libraries(primecompression gmp)
     #add_executable (primecompression-tests "test/element/add.cpp")
     #target_link_libraries(primecompression-tests Boost)

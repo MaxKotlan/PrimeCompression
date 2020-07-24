@@ -1,4 +1,5 @@
 #include "fieldsearch.h"
+#include "actions.h"
 
 void FieldSearch::NormalizeMarkedTargets(SearchSettings& s){
     for (auto &t : s.targets)
@@ -26,14 +27,17 @@ void FieldSearch::Search(SearchSettings ssettings){
         _f.setA(a);
         gmp::mpz_int b = (s - _gx*a)%p;
         _f.setB(b);
-        //if (a > 100) break;
-        if (a%ssettings.pollingrate==0 && ssettings.printnonmatches){
-            switch(ssettings.printsettings.equationformat) {
-                case PrintSettings::EquationFormat::GX: _f.printElementFieldEquationGXPrecomputed(_gx); break; 
-                case PrintSettings::GPowerX:            _f.printElementFieldEquation(ssettings.index); break;
-            }
-            _f.print(ssettings.printsettings);
-        }
+
+        SearchState searchstate{
+            .searchsettings=ssettings,
+            .fd=_f,
+            .gx=_gx,
+            .s=s
+        };
+
+        for (auto &action : Actions)
+            action.act(searchstate);
+        
         uint8_t check = (uint8_t)(_f.getElement(ssettings.index+1)%ssettings.printsettings.subfield);
         /*if (check != 0){
             std::cout << aa << std::endl;
@@ -44,22 +48,8 @@ void FieldSearch::Search(SearchSettings ssettings){
             foundcount++;
         }
         
-        if (foundcount == 27)
-            break;
-        for (Target &targ : ssettings.targets){
-            if (_f.containsAt(ssettings.index, targ.data, ssettings.printsettings.subfield)){
-                if (ssettings.printmatches){
-                    std::cout << a - aprev << ", ";
-                    aprev = a;
-                }
-                //std::cout << "Found at: ";
-                //_f.printElementFieldEquation(ssettings.index);
-                //_f.print(ssettings.printsettings);
-                //std::cout << std::endl;
-                if (targ.halt)
-                    exit(0);
-            }
-        }
+        //if (foundcount == 27)
+        //    break;
     }
     for (int i = 0; i < firstfound.size(); i++)
         std::cout << (uint8_t)('A'+i) << ": " << firstfound[i] << ", ";
