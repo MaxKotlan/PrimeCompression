@@ -19,7 +19,7 @@ void SearchLarge(){
         .printnonmatches=true,
         .targets={
             Target{
-                .data={ 'M', 'A', 'X' },
+                .data={ 'M', 'A', 'X', 'W', 'E' },
                 .normalize=true,
                 .halt=false
             }/*,

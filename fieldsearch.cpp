@@ -36,7 +36,7 @@ void FieldSearch::Search(SearchSettings ssettings){
         };
 
         for (auto &action : Actions)
-            action.act(searchstate);
+            action.act(searchstate, action);
         
         uint8_t check = (uint8_t)(_f.getElement(ssettings.index+1)%ssettings.printsettings.subfield);
         /*if (check != 0){

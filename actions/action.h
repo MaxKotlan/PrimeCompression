@@ -11,6 +11,7 @@ struct SearchState{
 
 struct Action{    
     uint64_t id = 0x37458;
-    void (*act)(SearchState &s);//=&Test;
+    void PrintInfo() const { std::cout << "A" << id << ": "; };
+    void (*act)(SearchState &s, const Action& act);
     bool condition=false;
 };
