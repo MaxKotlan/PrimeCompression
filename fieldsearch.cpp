@@ -12,23 +12,6 @@ void FieldSearch::NormalizeTarget(Target &t, gmp::mpz_int &post_offset){
         e = e - post_offset;
 }
 
-void FieldSearch::SearchThread(uint64_t threadid, gmp::mpz_int a){
-        _f.setA(a);
-        gmp::mpz_int b = (s - _gx*a)%p;
-        _f.setB(b);
-
-        SearchState searchstate{
-            .searchsettings=ssettings,
-            .fd=_f,
-            .gx=_gx,
-            .s=s
-        };
-
-        for (auto &action : Actions)
-            action.act(searchstate, action);
-}
-
-
 void FieldSearch::Search(SearchSettings ssettings){
     NormalizeMarkedTargets(ssettings);
     gmp::mpz_int initalelement = ssettings.targets[0].data[0];
