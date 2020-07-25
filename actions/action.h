@@ -1,4 +1,5 @@
 #pragma once
+#include <boost/property_tree/ptree.hpp>
 #include "../fieldsearch.h"
 
 struct SearchState{
@@ -9,9 +10,10 @@ struct SearchState{
 };
 
 
-struct Action{    
-    uint64_t id = 0x37458;
-    void PrintInfo() const { std::cout << "A" << id << ": "; };
-    void (*act)(SearchState &s, const Action& act);
-    bool condition=false;
+class Action{
+    public:
+        virtual void operator()(SearchState &s)=0;
+        virtual void load(boost::property_tree::ptree &_tree)=0;
+    private:
+        uint64_t id = 0;
 };

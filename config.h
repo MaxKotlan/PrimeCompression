@@ -6,6 +6,8 @@
 #include <set>
 #include <exception>
 #include <iostream>
+#include <vector>
+#include "actions.h"
 #include "field.h"
 #include "fieldsearch.h"
 namespace pt = boost::property_tree;
@@ -13,6 +15,7 @@ namespace pt = boost::property_tree;
 class Config{
     public:
         Config(std::string configfile);
+        ~Config();
     protected:
         void ReadField();
         void ReadSearchSettings();
@@ -22,4 +25,5 @@ class Config{
         FieldParameters _fieldparams;
         SearchSettings  _searchsettings;
         pt::ptree _tree;
+        std::vector<Action*> _actions;
 };

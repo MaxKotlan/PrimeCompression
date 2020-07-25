@@ -15,9 +15,9 @@ void SearchLarge(){
     fs.Search({
         .a_offset=0,
         .index=3,
-        .pollingrate=1,
+        .pollingrate=1000000,
         .printmatches=true,
-        .printnonmatches=false,
+        .printnonmatches=true,
         .targets={
             Target{
                 .data={ 'M', 'A', 'X'},
@@ -121,8 +121,10 @@ void predict(mpz_int p, mpz_int e1){
 
 int main(int argc, char** argv){
     Config("config.json");
-    std::cout << Actions[0].id << std::endl;
-    
+    std::vector<Action*> testvec;// testvec(10);
+    Print lol = Print();
+    testvec.push_back(&lol);
+    //std::cout << Actions[0].id << std::endl;
     //SearchSmall();
     //SearchMedium();
     //.predict(997, 12);

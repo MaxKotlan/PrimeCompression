@@ -31,9 +31,15 @@ void FieldSearch::Search(SearchSettings ssettings){
             .s=s
         };
 
+        Action* ar;
+        Print p;
+        ar = &p;
+        (*ar)(searchstate);
+        //p(searchstate);
+        /*
         for (auto &action : Actions)
             action.act(searchstate, action);
-        
+        */
     }
     std::cout << "Search Complete" << std::endl;
 }
