@@ -7,19 +7,19 @@ using namespace gmp;
 
 void SearchLarge(){
     Field field({
-        .generator=mpz_int("42738974982347923857982357982357892357"),
-        .moduli=/*(1 << 31)-1*/mpz_int("4776913109852041418248056622882488319")
+        .generator=mpz_int("27385783295798237589235798273598289357892357329857"),
+        .moduli=mpz_int("43143988327398957279342419750374600193")//mpz_int("8683317618811886495518194401279999999")//103843//7919//((1 << 31) -1)
     });
     FieldSearch fs(field);
     fs.Search({
         .a_offset=0,
-        .index=0,
-        .pollingrate=1000000,
+        .index=3,
+        .pollingrate=1,
         .printmatches=true,
-        .printnonmatches=true,
+        .printnonmatches=false,
         .targets={
             Target{
-                .data={ 'M', 'A', 'X', 'W', 'E' },
+                .data={ 'M', 'A', 'X'},
                 .normalize=true,
                 .halt=false
             }/*,
@@ -121,7 +121,7 @@ void predict(mpz_int p, mpz_int e1){
 int main(int argc, char** argv){
     std::cout << Actions[0].id << std::endl;
     
-    SearchSmall();
+    //SearchSmall();
     //SearchMedium();
     //.predict(997, 12);
 
