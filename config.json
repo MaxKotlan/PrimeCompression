@@ -1,0 +1,39 @@
+{
+    "field":{
+        "generator": "27385783295798237589235798273598289357892357329857",
+        "moduli": "43143988327398957279342419750374600193"
+    },
+    "searchsettings":{
+        "a_offset":0,
+        "index":3,
+        "actions": [
+            {
+                "name": "SearchFor",
+                "targets": [
+                    {
+                        "data": "MAX",
+                        "normalize":true,
+                        "halt":false
+                    },
+                    {
+                        "data": "MAXWELL"
+                    }
+                ],
+                "enabled": true
+            },
+            {
+                "name": "NonMatch",
+                "pollingrate": 100000,
+                "enabled": true
+            }
+        ]
+    },
+    "printsettings":{
+        "range":15,
+        "offset":0,
+        "post_offset": 65,
+        "subfield": 26,
+        "equationformat": 1,
+        "printmode": 3
+    }
+}

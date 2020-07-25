@@ -1,6 +1,7 @@
 #include <iostream>
 #include <boost/multiprecision/gmp.hpp>
 #include "fieldsearch.h"
+#include "config.h"
 #include "actions.h"
 
 using namespace gmp;
@@ -119,6 +120,7 @@ void predict(mpz_int p, mpz_int e1){
 }
 
 int main(int argc, char** argv){
+    Config("config.json");
     std::cout << Actions[0].id << std::endl;
     
     //SearchSmall();
