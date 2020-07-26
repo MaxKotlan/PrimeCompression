@@ -6,8 +6,8 @@
 struct SearchState{
     SearchSettings& searchsettings;
     Field& fd;
-    gmp::mpz_int& gx;
-    gmp::mpz_int& s;
+    gmp::mpz_int gx;
+    gmp::mpz_int  s;
 };
 
 

@@ -16,8 +16,6 @@ struct SearchSettings{
     gmp::mpz_int pollingrate = 1000000;
     uint8_t initalelement;
     bool initalelementnormalize = true;
-    bool printmatches = true;
-    bool printnonmatches = false;
     std::vector<Target> targets;
     PrintSettings printsettings;
 };

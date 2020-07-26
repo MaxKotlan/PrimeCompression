@@ -28,11 +28,11 @@
                     }
                 ],
                 "pollingrate": 1,
-                "enabled": true
+                "enabled": false
             },
             {
                 "name": "NonMatch",
-                "pollingrate": 100000,
+                "pollingrate": 1000000,
                 "enabled": true
             }
         ]

@@ -6,7 +6,7 @@
 class FieldSearch{
     public:
         FieldSearch(Config& conf) : _conf(conf), _f(conf.getFieldParameters()){
-            std::cout << "Searching Field: " << conf.getFieldParameters().generator << "^x mod" << conf.getFieldParameters().moduli; 
+            std::cout << "Searching Field: a*" << conf.getFieldParameters().generator << "^x+b mod" << conf.getFieldParameters().moduli << std::endl<< std::endl; 
         }
         void Search();
     protected:
