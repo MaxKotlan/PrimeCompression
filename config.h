@@ -16,14 +16,20 @@ class Config{
     public:
         Config(std::string configfile);
         ~Config();
-    protected:
+        inline const FieldParameters& getFieldParameters() const { return _fieldparams;    };
+        inline const SearchSettings&  getSearchSettings()  const { return _searchsettings; };
+        inline const PrintSettings&   getPrintSettings()   const { return _printsettings;  };
+        inline const std::vector<Action*>&   getActions()  const { return _actions;};
+
+    private:
         void ReadField();
         void ReadSearchSettings();
         void ReadPrintSettings();
-    public:
-        std::string _filename;
+
+        std::string     _filename;
         FieldParameters _fieldparams;
         SearchSettings  _searchsettings;
-        pt::ptree _tree;
+        PrintSettings   _printsettings;
+        pt::ptree       _tree;
         std::vector<Action*> _actions;
 };

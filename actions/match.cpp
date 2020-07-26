@@ -4,33 +4,33 @@ namespace pt = boost::property_tree;
 
 void Match::operator()(SearchState &ss){
 
-    for (Target &targ : ss.searchsettings.targets){
+    for (Target &targ : _targets){
         if (ss.fd.containsAt(ss.searchsettings.index, targ.data, ss.searchsettings.printsettings.subfield)){
-            if(ss.searchsettings.printmatches){
-                Action::time();
-                std::cout << "Found at: ";
-                ss.fd.printElementFieldEquation(ss.searchsettings.index);
-                ss.fd.print(ss.searchsettings.printsettings);
-            }
+            Action::time();
+            std::cout << "Found at: ";
+            ss.fd.printElementFieldEquation(ss.searchsettings.index);
+            ss.fd.print(ss.searchsettings.printsettings);
             if (targ.halt)
                 exit(0);
         }
     }
-
-    /*
-    if (ss.fd.getA()%_pollingrate==0 && ss.searchsettings.printnonmatches){
-        time();
-        switch(ss.searchsettings.printsettings.equationformat) {
-            case PrintSettings::EquationFormat::GX: ss.fd.printElementFieldEquationGXPrecomputed(ss.gx); break; 
-            case PrintSettings::GPowerX:            ss.fd.printElementFieldEquation(ss.searchsettings.index); break;
-        }
-        ss.fd.print(ss.searchsettings.printsettings);
-    }*/
 }
 
 void Match::load(pt::ptree &_tree){
     Action::load(_tree);
-
+    for (auto &targetprop : _tree.get_child("targets")){
+        auto &target = targetprop.second;
+        Target t;
+        std::string data = target.get<std::string>("data");
+        for (uint8_t bte : data)
+            if (bte != '\0')
+                t.data.push_back(bte-'A');
+        t.normalize=target.get<bool>("normalize",t.normalize);
+        t.halt=target.get<bool>("halt",t.halt);
+        _targets.push_back(t);
+    }
+    for (auto c : _targets[0].data)
+        std::cout << c << ":::::";
 }
 
 /*

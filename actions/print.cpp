@@ -3,7 +3,7 @@
 namespace pt = boost::property_tree;
 
 void Print::operator()(SearchState &ss){
-    if (ss.fd.getA()%_pollingrate==0 && ss.searchsettings.printnonmatches){
+    if (ss.fd.getA()%_pollingrate==0){
         time();
         switch(ss.searchsettings.printsettings.equationformat) {
             case PrintSettings::EquationFormat::GX: ss.fd.printElementFieldEquationGXPrecomputed(ss.gx); break; 

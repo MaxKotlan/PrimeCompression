@@ -13,8 +13,11 @@ void FieldSearch::NormalizeTarget(Target &t, gmp::mpz_int &post_offset){
 }
 
 void FieldSearch::Search(SearchSettings ssettings, Config& conf){
+    SearchSettings conf_searchsettings = conf.getSearchSettings();
+
+    
     NormalizeMarkedTargets(ssettings);
-    gmp::mpz_int initalelement = ssettings.targets[0].data[0];
+    gmp::mpz_int initalelement = (conf_searchsettings.initalelementnormalize) ? conf_searchsettings.initalelement - 'A' : conf_searchsettings.initalelement;
     gmp::mpz_int s = (_f.getModuli()*(_f.getModuli()-1)+initalelement);
     gmp::mpz_int p = _f.getModuli();
     gmp::mpz_int _gx = gmp::powm(_f.getGenerator(), ssettings.index, _f.getModuli());
@@ -31,18 +34,9 @@ void FieldSearch::Search(SearchSettings ssettings, Config& conf){
             .s=s
         };
 
-        for (auto action: conf._actions)
+        for (auto action: conf.getActions())
             action->operator()(searchstate);
 
-        /*Action* ar;
-        Print p;
-        ar = &p;
-        (*ar)(searchstate);*/
-        //p(searchstate);
-        /*
-        for (auto &action : Actions)
-            action.act(searchstate, action);
-        */
     }
     std::cout << "Search Complete" << std::endl;
 }
