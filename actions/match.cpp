@@ -29,8 +29,6 @@ void Match::load(pt::ptree &_tree){
         t.halt=target.get<bool>("halt",t.halt);
         _targets.push_back(t);
     }
-    for (auto c : _targets[0].data)
-        std::cout << c << ":::::";
 }
 
 /*

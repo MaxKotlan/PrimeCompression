@@ -13,12 +13,18 @@
                 "name": "SearchFor",
                 "targets": [
                     {
-                        "data": "MEET",
+                        "data": "MAXWE",
                         "normalize":true,
                         "halt":false
                     },
                     {
-                        "data": "MAXW"
+                        "data": "MAXWELL",
+                        "normalize":true,
+                        "halt":true
+                    },
+                    {
+                        "data": "MKOTLAN",
+                        "halt": true
                     }
                 ],
                 "pollingrate": 1,
