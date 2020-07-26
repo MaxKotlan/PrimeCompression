@@ -19,11 +19,12 @@
                         "data": "MAXWELL"
                     }
                 ],
+                "pollingrate": 1,
                 "enabled": true
             },
             {
                 "name": "NonMatch",
-                "pollingrate": 100000,
+                "pollingrate": 1000000,
                 "enabled": true
             }
         ]

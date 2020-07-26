@@ -9,7 +9,7 @@
 #include <vector>
 #include "actions.h"
 #include "field.h"
-#include "fieldsearch.h"
+#include "searchsettings.h"
 namespace pt = boost::property_tree;
 
 class Config{
@@ -20,7 +20,7 @@ class Config{
         void ReadField();
         void ReadSearchSettings();
         void ReadPrintSettings();
-    private:
+    public:
         std::string _filename;
         FieldParameters _fieldparams;
         SearchSettings  _searchsettings;

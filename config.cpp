@@ -20,10 +20,15 @@ void Config::ReadField(){
 void Config::ReadSearchSettings(){
     _searchsettings.a_offset = _tree.get<gmp::mpz_int>("searchsettings.a_offset");
     _searchsettings.index    = _tree.get<gmp::mpz_int>("searchsettings.index");
-    for(pt::ptree::value_type &action : _tree.get_child("searchsettings.actions")) {
-        std::string re = action.second.get<std::string>("name");
-        _actions.push_back(ActionFactory::getAction(re));
-        std::cout << re << std::endl;
-        //_actions.push_back(new )
+    for(pt::ptree::value_type &actionprop : _tree.get_child("searchsettings.actions")) {
+        auto &action = actionprop.second;
+        if(action.get<bool>("enabled", true)){
+
+            std::string re = action.get<std::string>("name");
+            Action* act = ActionFactory::getAction(re);
+            act->load(action);
+            _actions.push_back(act);
+            std::cout << "Enabled Action: " << re << std::endl;
+        }
     }
 }

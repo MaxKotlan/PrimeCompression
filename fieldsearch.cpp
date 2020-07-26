@@ -12,7 +12,7 @@ void FieldSearch::NormalizeTarget(Target &t, gmp::mpz_int &post_offset){
         e = e - post_offset;
 }
 
-void FieldSearch::Search(SearchSettings ssettings){
+void FieldSearch::Search(SearchSettings ssettings, Config& conf){
     NormalizeMarkedTargets(ssettings);
     gmp::mpz_int initalelement = ssettings.targets[0].data[0];
     gmp::mpz_int s = (_f.getModuli()*(_f.getModuli()-1)+initalelement);
@@ -31,10 +31,13 @@ void FieldSearch::Search(SearchSettings ssettings){
             .s=s
         };
 
-        Action* ar;
+        for (auto action: conf._actions)
+            action->operator()(searchstate);
+
+        /*Action* ar;
         Print p;
         ar = &p;
-        (*ar)(searchstate);
+        (*ar)(searchstate);*/
         //p(searchstate);
         /*
         for (auto &action : Actions)

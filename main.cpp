@@ -7,6 +7,7 @@
 using namespace gmp;
 
 void SearchLarge(){
+    Config conf("config.json");
     Field field({
         .generator=mpz_int("27385783295798237589235798273598289357892357329857"),
         .moduli=mpz_int("43143988327398957279342419750374600193")//mpz_int("8683317618811886495518194401279999999")//103843//7919//((1 << 31) -1)
@@ -20,7 +21,7 @@ void SearchLarge(){
         .printnonmatches=true,
         .targets={
             Target{
-                .data={ 'M', 'A', 'X'},
+                .data={ 'M', 'A', 'X', 'W'},
                 .normalize=true,
                 .halt=false
             }/*,
@@ -41,9 +42,9 @@ void SearchLarge(){
                 .printmode=PrintSettings::PrintMode::Char   
             }
         }
-    });
+    }, conf);
 }
-
+/*
 void SearchMedium(){
     Field field({
         .generator=3,//mpz_int("94217892"),
@@ -65,7 +66,7 @@ void SearchMedium(){
                 .data={ 'M', 'A', 'X', 'W', 'E', 'L', 'L'},
                 .normalize=true,
                 .halt=true
-            }*/
+            }
         },
         .printsettings={
             PrintSettings{
@@ -100,7 +101,7 @@ void SearchSmall(){
             }
         }
     });
-}
+}*/
 
 mpz_int mod(mpz_int a, mpz_int b){
     mpz_int c = a%b;
@@ -120,10 +121,7 @@ void predict(mpz_int p, mpz_int e1){
 }
 
 int main(int argc, char** argv){
-    Config("config.json");
-    std::vector<Action*> testvec;// testvec(10);
-    Print lol = Print();
-    testvec.push_back(&lol);
+    //Config("config.json");
     //std::cout << Actions[0].id << std::endl;
     //SearchSmall();
     //SearchMedium();
