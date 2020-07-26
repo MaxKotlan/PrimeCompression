@@ -8,6 +8,9 @@ using namespace gmp;
 
 void SearchLarge(){
     Config conf("config.json");
+    FieldSearch fs(conf);
+    fs.Search();
+    /*
     Field field({
         .generator=mpz_int("27385783295798237589235798273598289357892357329857"),
         .moduli=mpz_int("43143988327398957279342419750374600193")//mpz_int("8683317618811886495518194401279999999")//103843//7919//((1 << 31) -1)
@@ -29,7 +32,7 @@ void SearchLarge(){
                 .data={ 'M', 'A', 'X', 'W', 'E', 'L', 'L'},
                 .normalize=true,
                 .halt=true
-            }*/
+            }
         },
         .printsettings={
             PrintSettings{
@@ -42,7 +45,7 @@ void SearchLarge(){
                 .printmode=PrintSettings::PrintMode::Char   
             }
         }
-    }, conf);
+    }, conf);*/
 }
 /*
 void SearchMedium(){

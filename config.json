@@ -5,8 +5,8 @@
     },
     "searchsettings":{
         "a_offset":0,
-        "index":3,
-        "initalelement": "A",
+        "index":1,
+        "initalelement": "M",
         "initalelementnormalize": true,
         "actions": [
             {
@@ -37,6 +37,6 @@
         "post_offset": 65,
         "subfield": 26,
         "equationformat": 1,
-        "printmode": 3
+        "printmode": 2
     }
 }

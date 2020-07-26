@@ -5,6 +5,7 @@ Config::Config(std::string filename) : _filename(filename){
     pt::read_json(_filename, _tree);
     ReadField();
     ReadSearchSettings();
+    ReadPrintSettings();
 }
 
 Config::~Config(){
@@ -38,10 +39,10 @@ void Config::ReadSearchSettings(){
 }
 
 void Config::ReadPrintSettings(){
-    _printsettings.range       = _tree.get<gmp::mpz_int>("printsettings.range",       _printsettings.range);
-    _printsettings.offset      = _tree.get<gmp::mpz_int>("printsettings.offset",      _printsettings.offset);
-    _printsettings.post_offset = _tree.get<gmp::mpz_int>("printsettings.post_offset", _printsettings.post_offset);
-    _printsettings.subfield    = _tree.get<gmp::mpz_int>("printsettings.subfield",    _printsettings.subfield);
-    _printsettings.equationformat = static_cast<PrintSettings::EquationFormat>(_tree.get<int>("printsettings.equationformat", _printsettings.equationformat));
-    _printsettings.printmode      = static_cast<PrintSettings::PrintMode>(_tree.get<int>("printsettings.equationformat", _printsettings.printmode));
+    _printsettings.range       = _tree.get<gmp::mpz_int>("printsettings.range");//,       _printsettings.range);
+    _printsettings.offset      = _tree.get<gmp::mpz_int>("printsettings.offset");//,      _printsettings.offset);
+    _printsettings.post_offset = _tree.get<gmp::mpz_int>("printsettings.post_offset");//, _printsettings.post_offset);
+    _printsettings.subfield    = _tree.get<gmp::mpz_int>("printsettings.subfield");//,    _printsettings.subfield);
+    _printsettings.equationformat = static_cast<PrintSettings::EquationFormat>(_tree.get<uint8_t>("printsettings.equationformat"));//, _printsettings.equationformat));
+    _printsettings.printmode      = static_cast<PrintSettings::PrintMode>(_tree.get<uint8_t>("printsettings.printmode"));//, _printsettings.printmode));
 }
