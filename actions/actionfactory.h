@@ -3,6 +3,7 @@
 #include "print.h"
 #include "match.h"
 #include "first_occur.h"
+#include "distance.h"
 
 
 class ActionFactory{
@@ -11,6 +12,7 @@ class ActionFactory{
             if (identifier == "NonMatch") return new Print();
             else if (identifier == "SearchFor") return new Match();
             else if (identifier == "FirstOccur") return new FirstOccur();
+            else if (identifier == "Distance") return new Distance();
             else{
                 throw std::invalid_argument(identifier + " Is not a valid Action Identifier");
                 return nullptr;

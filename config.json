@@ -1,49 +1,47 @@
 {
     "field":{
-        "generator": "147483647",
-        "moduli": "2147483647"
+        "generator": "219399299321860431088446186461800194513179092528253176867916905438924152789522216",
+        "moduli": "2193992993218604310884461864618001945131790925282531768679169054389241527895222169476723691605898517"
     },
     "searchsettings":{
-        "a_offset":0,
-        "index":1,
-        "initalelement": "M",
+        "a_offset":"0",
+        "index":"219399299321860431088446186461800194513179092528253176867916905438924152789",
+        "initalelement": "A",
         "initalelementnormalize": true,
         "actions": [
             {
                 "name": "SearchFor",
                 "targets": [
                     {
-                        "data": "MAXWE",
+                        "data": "APPLE",
                         "normalize":true,
                         "halt":false
-                    },
-                    {
-                        "data": "MAXWELL",
-                        "normalize":true,
-                        "halt":true
-                    },
-                    {
-                        "data": "MKOTLAN",
-                        "halt": true
                     }
                 ],
-                "pollingrate": 1,
-                "enabled": false
-            },
-            {
-                "name": "NonMatch",
                 "pollingrate": 1,
                 "enabled": true
             },
             {
+                "name": "NonMatch",
+                "pollingrate": 1,
+                "enabled": false
+            },
+            {
                 "name": "FirstOccur",
-                "halt": true
+                "halt": true,
+                "enabled": false
+            },
+            {
+                "name": "Distance",
+                "pollingrate": 80,
+                "printsize": 80,
+                "enabled": false
             }
         ]
     },
     "printsettings":{
         "range":15,
-        "offset":0,
+        "offset":"219399299321860431088446186461800194513179092528253176867916905438924152789",
         "post_offset": 65,
         "subfield": 26,
         "equationformat": 1,

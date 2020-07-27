@@ -12,6 +12,9 @@ void FieldSearch::NormalizeTarget(Target &t, gmp::mpz_int &post_offset){
         e = e - post_offset;
 }
 
+//void FieldSearch::SearchThread(uint64_t threadid){
+
+
 void FieldSearch::Search(){
     SearchSettings conf_searchsettings = _conf.getSearchSettings();
     PrintSettings  conf_printsettings  = _conf.getPrintSettings();
