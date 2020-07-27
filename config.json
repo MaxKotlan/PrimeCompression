@@ -1,7 +1,7 @@
 {
     "field":{
-        "generator": "219399299321860431088446186461800194513179092528253176867916905438924152789522216",
-        "moduli": "2193992993218604310884461864618001945131790925282531768679169054389241527895222169476723691605898517"
+        "generator": "3",
+        "moduli": "2147483647"
     },
     "searchsettings":{
         "a_offset":"0",
@@ -19,12 +19,12 @@
                     }
                 ],
                 "pollingrate": 1,
-                "enabled": true
+                "enabled": false
             },
             {
                 "name": "NonMatch",
                 "pollingrate": 1,
-                "enabled": false
+                "enabled": true
             },
             {
                 "name": "FirstOccur",

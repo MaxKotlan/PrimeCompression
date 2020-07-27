@@ -12,10 +12,7 @@ void FieldSearch::NormalizeTarget(Target &t, gmp::mpz_int &post_offset){
         e = e - post_offset;
 }
 
-//void FieldSearch::SearchThread(uint64_t threadid){
-
-
-void FieldSearch::Search(){
+void FieldSearch::Search(uint64_t threadid, uint64_t threadcount){
     SearchSettings conf_searchsettings = _conf.getSearchSettings();
     PrintSettings  conf_printsettings  = _conf.getPrintSettings();
     conf_searchsettings.printsettings  = conf_printsettings;
@@ -28,8 +25,7 @@ void FieldSearch::Search(){
         .s=(_f.getModuli()*(_f.getModuli()-1)+initalelement)
     };
     gmp::mpz_int p = _f.getModuli();
-    for (gmp::mpz_int a(conf_searchsettings.a_offset); a < _f.getModuli(); a++){
-        
+    for (gmp::mpz_int a(conf_searchsettings.a_offset+threadid); a < _f.getModuli(); a+=threadcount){
         _f.setA(a);
         gmp::mpz_int b = (state.s - state.gx*a)%p;
         _f.setB(b);
