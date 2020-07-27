@@ -1,7 +1,7 @@
 {
     "field":{
-        "generator": "27385783295798237589235798273598289357892357329857",
-        "moduli": "43143988327398957279342419750374600193"
+        "generator": "147483647",
+        "moduli": "2147483647"
     },
     "searchsettings":{
         "a_offset":0,
@@ -32,8 +32,12 @@
             },
             {
                 "name": "NonMatch",
-                "pollingrate": 1000000,
+                "pollingrate": 1,
                 "enabled": true
+            },
+            {
+                "name": "FirstOccur",
+                "halt": true
             }
         ]
     },
