@@ -3,9 +3,9 @@
 #include "searchsettings.h"
 #include "config.h"
 
-class FieldSearch{
+class SearchThread{
     public:
-        FieldSearch(Config& conf) : _conf(conf), _f(conf.getFieldParameters()){}
+        SearchThread(Config& conf) : _conf(conf), _f(conf.getFieldParameters()){}
         void Search(uint64_t threadid, uint64_t threadcount);
     protected:
         void NormalizeMarkedTargets(SearchSettings& s);

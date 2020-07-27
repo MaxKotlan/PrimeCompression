@@ -1,11 +1,11 @@
 {
     "field":{
-        "generator": "21474",
-        "moduli": "997"
+        "generator": "7598327598327598237598237598237598235798235798235798235798235792835792388",
+        "moduli": "14083359469338511572632447718747493405040362318205860500297736061630222431052998057250747900577940212317413063"
     },
     "threadsettings": {
-        "autodetect": true,
-        "threadcount": 2
+        "autodetect": false,
+        "threadcount": 1
     },
     "searchsettings":{
         "a_offset":"0",
@@ -17,7 +17,7 @@
                 "name": "SearchFor",
                 "targets": [
                     {
-                        "data": "MAXWE",
+                        "data": "MAXWELL",
                         "normalize":true,
                         "halt":false
                     },
@@ -33,7 +33,7 @@
             {
                 "name": "NonMatch",
                 "pollingrate": 1000000,
-                "enabled": true
+                "enabled": false
             },
             {
                 "name": "FirstOccur",
@@ -42,9 +42,9 @@
             },
             {
                 "name": "Distance",
-                "pollingrate": 80,
-                "printsize": 80,
-                "enabled": false
+                "pollingrate": 10000,
+                "printsize": 20,
+                "enabled": true
             }
         ]
     },

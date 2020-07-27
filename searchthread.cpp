@@ -1,18 +1,18 @@
-#include "fieldsearch.h"
+#include "searchthread.h"
 #include "actions.h"
 
-void FieldSearch::NormalizeMarkedTargets(SearchSettings& s){
+void SearchThread::NormalizeMarkedTargets(SearchSettings& s){
     for (auto &t : s.targets)
         if (t.normalize)
             NormalizeTarget(t, s.printsettings.post_offset);
 }
 
-void FieldSearch::NormalizeTarget(Target &t, gmp::mpz_int &post_offset){
+void SearchThread::NormalizeTarget(Target &t, gmp::mpz_int &post_offset){
     for (auto &e : t.data)
         e = e - post_offset;
 }
 
-void FieldSearch::Search(uint64_t threadid, uint64_t threadcount){
+void SearchThread::Search(uint64_t threadid, uint64_t threadcount){
     SearchSettings conf_searchsettings = _conf.getSearchSettings();
     PrintSettings  conf_printsettings  = _conf.getPrintSettings();
     conf_searchsettings.printsettings  = conf_printsettings;
