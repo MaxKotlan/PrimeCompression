@@ -1,9 +1,11 @@
 #include "config.h"
 #include "actions.h"
+#include <thread>
 
 Config::Config(std::string filename) : _filename(filename){
     pt::read_json(_filename, _tree);
     ReadField();
+    ReadThreadSettings();
     ReadSearchSettings();
     ReadPrintSettings();
 }
@@ -17,6 +19,17 @@ void Config::ReadField(){
     _fieldparams.generator = _tree.get<gmp::mpz_int>("field.generator");
     _fieldparams.moduli = _tree.get<gmp::mpz_int>("field.moduli");
 }
+
+void Config::ReadThreadSettings(){
+    _threadsettings.autodetect  = _tree.get<bool>("threadsettings.autodetect", true);
+    if (!_threadsettings.autodetect)
+        _threadsettings.threadcount = _tree.get<uint64_t>("threadsettings.threadcount");
+    else {
+        _threadsettings.threadcount = std::thread::hardware_concurrency();
+    }
+    std::cout << "Using " << _threadsettings.threadcount << " Threads" << std::endl;
+}
+
 
 void Config::ReadSearchSettings(){
     _searchsettings.a_offset = _tree.get<gmp::mpz_int>("searchsettings.a_offset", _searchsettings.a_offset);

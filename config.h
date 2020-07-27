@@ -9,6 +9,7 @@
 #include <vector>
 #include "actions.h"
 #include "field.h"
+#include "threadsettings.h"
 #include "searchsettings.h"
 namespace pt = boost::property_tree;
 
@@ -16,6 +17,7 @@ class Config{
     public:
         Config(std::string configfile);
         ~Config();
+        inline const ThreadSettings&  getThreadSettings()  const { return _threadsettings; };
         inline const FieldParameters& getFieldParameters() const { return _fieldparams;    };
         inline const SearchSettings&  getSearchSettings()  const { return _searchsettings; };
         inline const PrintSettings&   getPrintSettings()   const { return _printsettings;  };
@@ -23,11 +25,13 @@ class Config{
 
     private:
         void ReadField();
+        void ReadThreadSettings();
         void ReadSearchSettings();
         void ReadPrintSettings();
 
         std::string     _filename;
         FieldParameters _fieldparams;
+        ThreadSettings  _threadsettings;
         SearchSettings  _searchsettings;
         PrintSettings   _printsettings;
         pt::ptree       _tree;

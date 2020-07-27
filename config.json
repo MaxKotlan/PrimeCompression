@@ -1,19 +1,28 @@
 {
     "field":{
-        "generator": "3",
-        "moduli": "2147483647"
+        "generator": "21474",
+        "moduli": "997"
+    },
+    "threadsettings": {
+        "autodetect": true,
+        "threadcount": 2
     },
     "searchsettings":{
         "a_offset":"0",
-        "index":"219399299321860431088446186461800194513179092528253176867916905438924152789",
-        "initalelement": "A",
+        "index":"0",
+        "initalelement": "M",
         "initalelementnormalize": true,
         "actions": [
             {
                 "name": "SearchFor",
                 "targets": [
                     {
-                        "data": "APPLE",
+                        "data": "MAXWE",
+                        "normalize":true,
+                        "halt":false
+                    },
+                    {
+                        "data": "MKOT",
                         "normalize":true,
                         "halt":false
                     }
@@ -23,7 +32,7 @@
             },
             {
                 "name": "NonMatch",
-                "pollingrate": 1,
+                "pollingrate": 1000000,
                 "enabled": true
             },
             {
@@ -41,7 +50,7 @@
     },
     "printsettings":{
         "range":15,
-        "offset":"219399299321860431088446186461800194513179092528253176867916905438924152789",
+        "offset":"0",
         "post_offset": 65,
         "subfield": 26,
         "equationformat": 1,

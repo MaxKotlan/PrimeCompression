@@ -9,7 +9,7 @@ void SearchThread(uint64_t threadid, uint64_t threadcount, Config conf){
 
 class Search{
     public:
-        Search(Config& conf) : _threads(10){
+        Search(Config& conf) : _threads(conf.getThreadSettings().threadcount){
             for (uint64_t i = 0; i < _threads.size(); i++)
                 _threads[i] = new std::thread(&SearchThread, i, _threads.size(),  conf);
             for (uint64_t i = 0; i < _threads.size(); i++)

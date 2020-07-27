@@ -5,9 +5,7 @@
 
 class FieldSearch{
     public:
-        FieldSearch(Config& conf) : _conf(conf), _f(conf.getFieldParameters()){
-            std::cout << "Searching Field: a*" << conf.getFieldParameters().generator << "^x+b mod" << conf.getFieldParameters().moduli << std::endl<< std::endl; 
-        }
+        FieldSearch(Config& conf) : _conf(conf), _f(conf.getFieldParameters()){}
         void Search(uint64_t threadid, uint64_t threadcount);
     protected:
         void NormalizeMarkedTargets(SearchSettings& s);
