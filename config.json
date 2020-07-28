@@ -1,0 +1,59 @@
+{
+    "field":{
+        "generator": "976522637021306403150551933319006137720124048624544172072735055780411834104862667155922841",
+        "moduli": "5628290459057877291809182450381238927697314822133923421169378062922140081498734424133112032854812293"
+    },
+    "threadsettings": {
+        "autodetect": true,
+        "threadcount": 1
+    },
+    "searchsettings":{
+        "a_offset":"0",
+        "index":"4",
+        "initalelement": "M",
+        "initalelementnormalize": true,
+        "actions": [
+            {
+                "name": "SearchFor",
+                "targets": [
+                    {
+                        "data": "MAXWELL",
+                        "normalize":true,
+                        "halt":false
+                    },
+                    {
+                        "data": "MKOT",
+                        "normalize":true,
+                        "halt":false
+                    }
+                ],
+                "pollingrate": 1,
+                "enabled": false
+            },
+            {
+                "name": "NonMatch",
+                "pollingrate": 1000000,
+                "enabled": false
+            },
+            {
+                "name": "FirstOccur",
+                "halt": true,
+                "enabled": false
+            },
+            {
+                "name": "Distance",
+                "pollingrate": 1,
+                "printsize": 20,
+                "enabled": true
+            }
+        ]
+    },
+    "printsettings":{
+        "range":15,
+        "offset":"0",
+        "post_offset": 65,
+        "subfield": 26,
+        "equationformat": 1,
+        "printmode": 2
+    }
+}

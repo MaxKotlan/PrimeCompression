@@ -1,3 +1,10 @@
 #pragma once
 #include "action.h"
-extern const Action act_print;
+
+class Print : public Action{
+    public:
+        Print(){};
+        void operator()(SearchState &s);
+        void load(boost::property_tree::ptree &_tree);
+        Action* clone();
+};

@@ -33,28 +33,28 @@ class Field{
     public:
         Field(FieldParameters fieldparameters);
 
-        void inline setCoefficents(gmp::mpz_int &a, gmp::mpz_int &b) { _a = a; _b = b; }
-        gmp::mpz_int inline getModuli() { return _p; };
-        gmp::mpz_int inline getGenerator() { return _g; };
-        gmp::mpz_int inline getA() { return _a; };
-        gmp::mpz_int inline getB() { return _b; };
-        void inline setA(gmp::mpz_int &a) {_a = a;};
-        void inline setB(gmp::mpz_int &b) {_b = b;};
-        gmp::mpz_int inline size() { return _p - 1; };
-        void print(PrintSettings &psettings);
-        bool containsAt(gmp::mpz_int &index, std::vector<gmp::mpz_int> &elements, gmp::mpz_int &subfield);
-        gmp::mpz_int getElement(gmp::mpz_int index) {
+        void inline setCoefficents(const gmp::mpz_int &a,const  gmp::mpz_int &b) { _a = a; _b = b; }
+        gmp::mpz_int inline getModuli() const { return _p; };
+        gmp::mpz_int inline getGenerator() const { return _g; };
+        gmp::mpz_int inline getA() const { return _a; };
+        gmp::mpz_int inline getB() const { return _b; };
+        void inline setA(const gmp::mpz_int &a) {_a = a;};
+        void inline setB(const gmp::mpz_int &b) {_b = b;};
+        gmp::mpz_int inline size() const { return _p - 1; };
+        void print(const PrintSettings &psettings) const;
+        bool containsAt(const gmp::mpz_int &index, const std::vector<gmp::mpz_int> &elements, const gmp::mpz_int &subfield) const;
+        gmp::mpz_int getElement(const gmp::mpz_int index) const {
             gmp::mpz_int k = gmp::powm(_g, index,_p); 
             return ((_a * k+_b)%_p); 
         };
-        void printElementFieldEquation(gmp::mpz_int &index);
-        void printElementFieldEquationGXPrecomputed(gmp::mpz_int &gx);
-        void printGeneralFieldEquation();
+        void printElementFieldEquation(const gmp::mpz_int &index) const;
+        void printElementFieldEquationGXPrecomputed(const gmp::mpz_int &gx) const;
+        void printGeneralFieldEquation() const;
 
     protected:
-        void printDec(PrintSettings &psettings);
-        void printHex(PrintSettings &psettings);
-        void printChar(PrintSettings &psettings);
+        void printDec(const PrintSettings &psettings)  const;
+        void printHex(const PrintSettings &psettings)  const;
+        void printChar(const PrintSettings &psettings) const;
 
     private:
         /*Coefficents used to modify standard exponential fields*/

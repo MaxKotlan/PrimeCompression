@@ -2,9 +2,7 @@
 
 Field::Field(FieldParameters fieldparameters) : _g(fieldparameters.generator), _p(fieldparameters.moduli), _a(fieldparameters.coefficenta), _b(fieldparameters.coefficentb) {};
 
-void Field::print(PrintSettings &psettings){
-    if(psettings.range==0)
-        psettings.range=size();
+void Field::print(const PrintSettings &psettings) const{
     switch(psettings.printmode){
         case PrintSettings::PrintMode::Dec:
         printDec(psettings);break;
@@ -15,37 +13,37 @@ void Field::print(PrintSettings &psettings){
     }
 }
 
-void Field::printDec(PrintSettings &psettings){
+void Field::printDec(const PrintSettings &psettings) const{
     for (gmp::mpz_int i = psettings.offset; i < psettings.offset+psettings.range; i++)
         std::cout << ((getElement(i)%psettings.subfield)+psettings.post_offset) << " ";
     std::cout << (psettings.range==size()?"":"...") << std::endl;
 }
 
-void Field::printHex(PrintSettings &psettings){
+void Field::printHex(const PrintSettings &psettings) const{
     for (gmp::mpz_int i = psettings.offset; i < psettings.offset+psettings.range; i++)
         std::cout << std::setfill(' ') << std::setw( 2 ) << std::hex  << ((getElement(i)%psettings.subfield)+psettings.post_offset) << " ";
     std::cout << (psettings.range==size()?"":"...") << std::dec << std::endl;
 }
 
-void Field::printChar(PrintSettings &psettings){
+void Field::printChar(const PrintSettings &psettings) const{
     for (gmp::mpz_int i = psettings.offset; i < psettings.offset+psettings.range; i++)
         std::cout << (uint8_t)((getElement(i)%psettings.subfield)+psettings.post_offset) << " ";
     std::cout << (psettings.range==size()?"":"...")<< std::endl;
 }
 
-void Field::printElementFieldEquation(gmp::mpz_int &index){
+void Field::printElementFieldEquation(const gmp::mpz_int &index) const{
     std::cout << _a << " * " << _g << " ^ "<< index << " + " << _b << "\t";
 }
 
-void Field::printElementFieldEquationGXPrecomputed(gmp::mpz_int &gx){
+void Field::printElementFieldEquationGXPrecomputed(const gmp::mpz_int &gx) const{
     std::cout << _a << " * " << gx << " + " << _b << "\t";
 }
 
-void Field::printGeneralFieldEquation(){
+void Field::printGeneralFieldEquation() const{
     std::cout << _a << " * " << _g << "^x + " << _b << "\t";
 }
 
-bool Field::containsAt(gmp::mpz_int &index, std::vector<gmp::mpz_int> &elements, gmp::mpz_int &subfield){
+bool Field::containsAt(const gmp::mpz_int &index, const std::vector<gmp::mpz_int> &elements,const gmp::mpz_int &subfield) const{
     bool match = true;
     for (gmp::mpz_int i = index; i < elements.size()+index; i++)
         if (elements[(size_t)(i-index)] != (getElement(i)%subfield))

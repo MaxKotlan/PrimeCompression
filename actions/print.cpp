@@ -1,17 +1,22 @@
+#include "../config.h"
 #include "print.h"
 
-void execute(SearchState& ss, const Action& act){
-    if (ss.fd.getA()%ss.searchsettings.pollingrate==0 && ss.searchsettings.printnonmatches){
-        act.PrintInfo();
-        switch(ss.searchsettings.printsettings.equationformat) {
+namespace pt = boost::property_tree;
+
+void Print::operator()(SearchState &ss){
+    if (ss.fd.getA()%_pollingrate==0){
+        time();
+        switch(_conf->getPrintSettings().equationformat) {
             case PrintSettings::EquationFormat::GX: ss.fd.printElementFieldEquationGXPrecomputed(ss.gx); break; 
-            case PrintSettings::GPowerX:            ss.fd.printElementFieldEquation(ss.searchsettings.index); break;
+            case PrintSettings::GPowerX:            ss.fd.printElementFieldEquation(_conf->getSearchSettings().index); break;
         }
-        ss.fd.print(ss.searchsettings.printsettings);
+        ss.fd.print(_conf->getPrintSettings());
     }
 }
 
-const Action act_print{
-    .id=7861867,
-    .act=&execute
-};
+Action* Print::clone(){ return new Print(*this); }
+
+void Print::load(pt::ptree &_tree){
+    Action::load(_tree);
+
+}
