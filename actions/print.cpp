@@ -6,7 +6,7 @@ namespace pt = boost::property_tree;
 void Print::operator()(SearchState &ss){
     if (ss.fd.getA()%_pollingrate==0){
         time();
-        switch(_conf->getSearchSettings().printsettings.equationformat) {
+        switch(_conf->getPrintSettings().equationformat) {
             case PrintSettings::EquationFormat::GX: ss.fd.printElementFieldEquationGXPrecomputed(ss.gx); break; 
             case PrintSettings::GPowerX:            ss.fd.printElementFieldEquation(_conf->getSearchSettings().index); break;
         }

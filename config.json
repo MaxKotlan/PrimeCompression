@@ -33,7 +33,7 @@
             {
                 "name": "NonMatch",
                 "pollingrate": 1000000,
-                "enabled": true
+                "enabled": false
             },
             {
                 "name": "FirstOccur",
@@ -44,7 +44,7 @@
                 "name": "Distance",
                 "pollingrate": 1,
                 "printsize": 20,
-                "enabled": false
+                "enabled": true
             }
         ]
     },
