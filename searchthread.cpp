@@ -19,7 +19,6 @@ void SearchThread::Search(uint64_t threadid, uint64_t threadcount){
     gmp::mpz_int initalelement = ((conf_searchsettings.initalelementnormalize) ? (uint32_t)(conf_searchsettings.initalelement - 'A') : conf_searchsettings.initalelement);
 
     SearchState state{
-        .searchsettings=conf_searchsettings,
         .fd=_f,
         .gx=gmp::powm(_f.getGenerator(), conf_searchsettings.index, _f.getModuli()),
         .s=(_f.getModuli()*(_f.getModuli()-1)+initalelement)

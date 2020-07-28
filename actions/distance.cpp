@@ -1,9 +1,10 @@
+#include "../config.h"
 #include "distance.h"
 
 namespace pt = boost::property_tree;
 
 void Distance::operator()(SearchState &state){
-    uint8_t check = (uint8_t)(state.fd.getElement(state.searchsettings.index+1)%state.searchsettings.printsettings.subfield);
+    uint8_t check = (uint8_t)(state.fd.getElement(_conf->getSearchSettings().index+1)%_conf->getPrintSettings().subfield);
     //if (locations[check-'A'].size() < depth)
     //if (locations[check].size() > 0)
     //    avar = state.fd.getA()-locations[check].back();

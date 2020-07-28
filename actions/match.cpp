@@ -1,3 +1,4 @@
+#include "../config.h"
 #include "match.h"
 
 namespace pt = boost::property_tree;
@@ -5,11 +6,11 @@ namespace pt = boost::property_tree;
 void Match::operator()(SearchState &ss){
 
     for (Target &targ : _targets){
-        if (ss.fd.containsAt(ss.searchsettings.index, targ.data, ss.searchsettings.printsettings.subfield)){
+        if (ss.fd.containsAt(_conf->getSearchSettings().index, targ.data, _conf->getPrintSettings().subfield)){
             Action::time();
             std::cout << "Found at: ";
-            ss.fd.printElementFieldEquation(ss.searchsettings.index);
-            ss.fd.print(ss.searchsettings.printsettings);
+            ss.fd.printElementFieldEquation(_conf->getSearchSettings().index);
+            ss.fd.print(_conf->getPrintSettings());
             if (targ.halt)
                 exit(0);
         }
