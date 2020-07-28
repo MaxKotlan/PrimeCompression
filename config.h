@@ -16,12 +16,11 @@ namespace pt = boost::property_tree;
 class Config{
     public:
         Config(std::string configfile);
-        ~Config();
         inline const ThreadSettings&  getThreadSettings()  const { return _threadsettings; };
         inline const FieldParameters& getFieldParameters() const { return _fieldparams;    };
         inline const SearchSettings&  getSearchSettings()  const { return _searchsettings; };
         inline const PrintSettings&   getPrintSettings()   const { return _printsettings;  };
-        inline const std::vector<Action*>&   getActions()  const { return _actions;};
+        inline const std::vector<std::shared_ptr<Action>>&   getActions()  const { return _actions;};
 
     private:
         void ReadField();
@@ -35,5 +34,5 @@ class Config{
         SearchSettings  _searchsettings;
         PrintSettings   _printsettings;
         pt::ptree       _tree;
-        std::vector<Action*> _actions;
+        std::vector<std::shared_ptr<Action>> _actions;
 };

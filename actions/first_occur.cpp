@@ -19,6 +19,8 @@ void FirstOccur::operator()(SearchState &state){
     }
 }
 
+Action* FirstOccur::clone(){ return new FirstOccur(*this); }
+
 void FirstOccur::load(pt::ptree &_tree){
     Action::load(_tree);
     halt = _tree.get<bool>("halt", false);

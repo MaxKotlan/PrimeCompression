@@ -20,13 +20,15 @@ void Distance::operator()(SearchState &state){
                     res = locations[i][0];
                 else
                     res = (locations[i][j] - locations[i][j-1]);
-                std::cout << res << " ";
+                std::cout << std::fixed << std::setw(2) << res << " ";
             }
             std::cout << std::endl;
         }
         std::cout << std::endl;
     }
 }
+
+Action* Distance::clone(){ return new Distance(*this); }
 
 void Distance::load(pt::ptree &_tree){
     Action::load(_tree);

@@ -8,11 +8,11 @@
 
 class ActionFactory{
     public:
-        static Action* getAction(std::string identifier){
-            if (identifier == "NonMatch") return new Print();
-            else if (identifier == "SearchFor") return new Match();
-            else if (identifier == "FirstOccur") return new FirstOccur();
-            else if (identifier == "Distance") return new Distance();
+        static std::shared_ptr<Action> getAction(std::string identifier){
+            if (identifier == "NonMatch")        return std::shared_ptr<Action>(new Print());
+            else if (identifier == "SearchFor")  return std::shared_ptr<Action>(new Match());
+            else if (identifier == "FirstOccur") return std::shared_ptr<Action>(new FirstOccur());
+            else if (identifier == "Distance")   return std::shared_ptr<Action>(new Distance());
             else{
                 throw std::invalid_argument(identifier + " Is not a valid Action Identifier");
                 return nullptr;

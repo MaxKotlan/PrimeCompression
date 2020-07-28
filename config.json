@@ -1,15 +1,15 @@
 {
     "field":{
-        "generator": "7598327598327598237598237598237598235798235798235798235798235792835792388",
-        "moduli": "14083359469338511572632447718747493405040362318205860500297736061630222431052998057250747900577940212317413063"
+        "generator": "976522637021306403150551933319006137720124048624544172072735055780411834104862667155922841",
+        "moduli": "5628290459057877291809182450381238927697314822133923421169378062922140081498734424133112032854812293"
     },
     "threadsettings": {
-        "autodetect": false,
+        "autodetect": true,
         "threadcount": 1
     },
     "searchsettings":{
         "a_offset":"0",
-        "index":"0",
+        "index":"4",
         "initalelement": "M",
         "initalelementnormalize": true,
         "actions": [
@@ -33,7 +33,7 @@
             {
                 "name": "NonMatch",
                 "pollingrate": 1000000,
-                "enabled": false
+                "enabled": true
             },
             {
                 "name": "FirstOccur",
@@ -42,9 +42,9 @@
             },
             {
                 "name": "Distance",
-                "pollingrate": 10000,
+                "pollingrate": 1,
                 "printsize": 20,
-                "enabled": true
+                "enabled": false
             }
         ]
     },

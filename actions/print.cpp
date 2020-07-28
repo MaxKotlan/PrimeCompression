@@ -13,6 +13,8 @@ void Print::operator()(SearchState &ss){
     }
 }
 
+Action* Print::clone(){ return new Print(*this); }
+
 void Print::load(pt::ptree &_tree){
     Action::load(_tree);
 

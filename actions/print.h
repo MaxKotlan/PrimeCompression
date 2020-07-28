@@ -6,4 +6,5 @@ class Print : public Action{
         Print(){};
         void operator()(SearchState &s);
         void load(boost::property_tree::ptree &_tree);
+        Action* clone();
 };
