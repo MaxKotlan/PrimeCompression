@@ -13,8 +13,8 @@ void SearchThread::NormalizeTarget(Target &t, gmp::mpz_int &post_offset){
 }
 
 void SearchThread::Search(uint64_t threadid, uint64_t threadcount){
-    SearchSettings conf_searchsettings = _conf.getSearchSettings();
-    PrintSettings  conf_printsettings  = _conf.getPrintSettings();
+    SearchSettings conf_searchsettings = _conf->getSearchSettings();
+    PrintSettings  conf_printsettings  = _conf->getPrintSettings();
     conf_searchsettings.printsettings  = conf_printsettings;
     gmp::mpz_int initalelement = ((conf_searchsettings.initalelementnormalize) ? (uint32_t)(conf_searchsettings.initalelement - 'A') : conf_searchsettings.initalelement);
 
@@ -30,7 +30,7 @@ void SearchThread::Search(uint64_t threadid, uint64_t threadcount){
         gmp::mpz_int b = (state.s - state.gx*a)%p;
         _f.setB(b);
 
-        for (auto action: _conf.getActions())
+        for (auto action: _conf->getActions())
             action->operator()(state);
 
     }

@@ -5,7 +5,7 @@
 
 class Search{
     public:
-        Search(Config& conf);
+        Search(Config* conf);
         ~Search();
         
     protected:

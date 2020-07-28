@@ -5,6 +5,6 @@
 
 int main(int argc, char** argv){
     Config conf("config.json");
-    Search s(conf);
+    Search s(&conf);
     return 0;
 }

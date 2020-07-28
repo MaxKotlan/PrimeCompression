@@ -38,6 +38,7 @@ void Config::ReadSearchSettings(){
         if(action.get<bool>("enabled", true)){
             std::string re = action.get<std::string>("name");
             std::shared_ptr<Action> act = ActionFactory::getAction(re);
+            act->setConfig(this);
             act->load(action);
             _actions.push_back(act);
             std::cout << re << ", ";
