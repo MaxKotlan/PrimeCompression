@@ -9,7 +9,8 @@ namespace pt = boost::property_tree;
 std::mutex mtx;
 
 void Distance::operator()(SearchState &state){
-    uint8_t check = (uint8_t)(state.fd.getElement(_conf->getSearchSettings().index+1)%_conf->getPrintSettings().subfield);
+    uint8_t check = (uint8_t)(state.fd.getElement(_conf->getSearchSettings().index+checkoffset)%_conf->getPrintSettings().subfield);
+    
     gmp::mpz_int avar = state.fd.getA();
     {
         std::lock_guard<std::mutex> printGuard(mtx);
@@ -38,6 +39,7 @@ Action* Distance::clone(){ return new Distance(*this); }
 
 void Distance::load(pt::ptree &_tree){
     Action::load(_tree);
-    printsize = _tree.get<gmp::mpz_int>("printsize", 10);
+    printsize   = _tree.get<gmp::mpz_int>("printsize", 10);
+    checkoffset = _tree.get<gmp::mpz_int>("checkoffset", checkoffset);
 
 }

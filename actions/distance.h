@@ -9,5 +9,6 @@ class Distance : public Action{
         Action* clone();
     private:
         std::vector<std::vector<gmp::mpz_int>> locations;
+        gmp::mpz_int checkoffset = 1;
         gmp::mpz_int printsize = 10;
 };
