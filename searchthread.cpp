@@ -9,11 +9,11 @@ void SearchThread::Search(uint64_t threadid, uint64_t threadcount){
 
     SearchState state{
         .fd=_f,
-        .gx=gmp::powm(_f.getGenerator(), conf_searchsettings.index, _f.getModuli()),
-        .s=(_f.getModuli()*(_f.getModuli()-1)+initalelement)
+        .gx=gmp::powm(_f.getGenerator(), conf_searchsettings.index, _f.getModulo()),
+        .s=(_f.getModulo()*(_f.getModulo()-1)+initalelement)
     };
-    gmp::mpz_int p = _f.getModuli();
-    for (gmp::mpz_int a(conf_searchsettings.a_offset+threadid); a < _f.getModuli(); a+=threadcount){
+    gmp::mpz_int p = _f.getModulo();
+    for (gmp::mpz_int a(conf_searchsettings.a_offset+threadid); a < _f.getModulo(); a+=threadcount){
         _f.setA(a);
         gmp::mpz_int b = (state.s - state.gx*a)%p;
         _f.setB(b);

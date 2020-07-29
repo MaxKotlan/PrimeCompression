@@ -24,7 +24,7 @@ struct PrintSettings{
 
 struct FieldParameters{
     gmp::mpz_int generator=1;
-    gmp::mpz_int moduli=1;
+    gmp::mpz_int modulo=1;
     gmp::mpz_int coefficenta=1;
     gmp::mpz_int coefficentb=0;
 };
@@ -34,7 +34,7 @@ class Field{
         Field(FieldParameters fieldparameters);
 
         void inline setCoefficents(const gmp::mpz_int &a,const  gmp::mpz_int &b) { _a = a; _b = b; }
-        gmp::mpz_int inline getModuli() const { return _p; };
+        gmp::mpz_int inline getModulo() const { return _p; };
         gmp::mpz_int inline getGenerator() const { return _g; };
         gmp::mpz_int inline getA() const { return _a; };
         gmp::mpz_int inline getB() const { return _b; };
@@ -61,7 +61,7 @@ class Field{
         gmp::mpz_int _a;
         gmp::mpz_int _b;
 
-        /*Generator and moduli*/
+        /*Generator and modulo*/
         gmp::mpz_int _g;
         gmp::mpz_int _p;
 };

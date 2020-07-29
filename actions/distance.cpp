@@ -2,7 +2,7 @@
 #include "distance.h"
 #include <mutex>
 #include <algorithm>
-#include <functional>   // std::greater
+#include <functional>
 
 namespace pt = boost::property_tree;
 
@@ -10,12 +10,7 @@ std::mutex mtx;
 
 void Distance::operator()(SearchState &state){
     uint8_t check = (uint8_t)(state.fd.getElement(_conf->getSearchSettings().index+1)%_conf->getPrintSettings().subfield);
-    //if (locations[check-'A'].size() < depth)
-    //if (locations[check].size() > 0)
-    //    avar = state.fd.getA()-locations[check].back();
-    //else
     gmp::mpz_int avar = state.fd.getA();
-    //std::vector<gmp::mpz_int> &letter = locations[check];
     {
         std::lock_guard<std::mutex> printGuard(mtx);
         locations[check].push_back(avar);

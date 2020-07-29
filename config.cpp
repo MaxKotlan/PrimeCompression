@@ -12,7 +12,7 @@ Config::Config(std::string filename) : _filename(filename){
 
 void Config::ReadField(){
     _fieldparams.generator = _tree.get<gmp::mpz_int>("field.generator");
-    _fieldparams.moduli = _tree.get<gmp::mpz_int>("field.moduli");
+    _fieldparams.modulo = _tree.get<gmp::mpz_int>("field.modulo");
 }
 
 void Config::ReadThreadSettings(){

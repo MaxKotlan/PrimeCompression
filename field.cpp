@@ -1,6 +1,6 @@
 #include "field.h"
 
-Field::Field(FieldParameters fieldparameters) : _g(fieldparameters.generator), _p(fieldparameters.moduli), _a(fieldparameters.coefficenta), _b(fieldparameters.coefficentb) {};
+Field::Field(FieldParameters fieldparameters) : _g(fieldparameters.generator), _p(fieldparameters.modulo), _a(fieldparameters.coefficenta), _b(fieldparameters.coefficentb) {};
 
 void Field::print(const PrintSettings &psettings) const{
     switch(psettings.printmode){
