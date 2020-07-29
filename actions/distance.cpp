@@ -1,7 +1,12 @@
 #include "../config.h"
 #include "distance.h"
+#include <mutex>
+#include <algorithm>
+#include <functional>   // std::greater
 
 namespace pt = boost::property_tree;
+
+std::mutex mtx;
 
 void Distance::operator()(SearchState &state){
     uint8_t check = (uint8_t)(state.fd.getElement(_conf->getSearchSettings().index+1)%_conf->getPrintSettings().subfield);
@@ -11,21 +16,26 @@ void Distance::operator()(SearchState &state){
     //else
     gmp::mpz_int avar = state.fd.getA();
     //std::vector<gmp::mpz_int> &letter = locations[check];
-    locations[check].push_back(avar);
-    if (state.fd.getA()%_pollingrate == 0){
-        for (int i = 0; i < locations.size(); i++){
-            std::cout << locations[i].size() << "\t" << (uint8_t)(i+'A') << ": ";
-            for (int j = 0/*(locations[i].size()-(uint64_t)printsize)*/; j < locations[i].size(); j++){
-                gmp::mpz_int res;
-                if (j == 0)
-                    res = locations[i][0];
-                else
-                    res = (locations[i][j] - locations[i][j-1]);
-                std::cout << std::fixed << std::setw(2) << res << " ";
+    {
+        std::lock_guard<std::mutex> printGuard(mtx);
+        locations[check].push_back(avar);
+        std::push_heap(locations[check].begin(), locations[check].end(), std::greater<gmp::mpz_int>());
+    
+        if (state.fd.getA()%_pollingrate == 0){
+            for (int i = 0; i < locations.size(); i++){
+                std::cout << locations[i].size() << "\t" << (uint8_t)(i+'A') << ": ";
+                std::vector<gmp::mpz_int>lol = locations[i];
+                gmp::mpz_int prev = 0;
+                while (lol.size() > 0){
+                    std::cout << std::fixed << std::setw(2) << lol.front()-prev << " ";
+                    prev = lol.front();
+                    std::pop_heap(lol.begin(), lol.end(), std::greater<gmp::mpz_int>());
+                    lol.pop_back();
+                }
+                std::cout << std::endl;
             }
             std::cout << std::endl;
         }
-        std::cout << std::endl;
     }
 }
 
