@@ -13,7 +13,7 @@ void SearchThread::Search(uint64_t threadid, uint64_t threadcount){
         .s=(_f.getModulo()*(_f.getModulo()-1)+initalelement)
     };
     gmp::mpz_int p = _f.getModulo();
-    for (gmp::mpz_int a(conf_searchsettings.a_offset+threadid); a < _f.getModulo(); a+=threadcount){
+    for (gmp::mpz_int a(conf_searchsettings.a_offset+threadid); a < _f.getModulo() && a < conf_searchsettings.a_range; a+=threadcount){
         _f.setA(a);
         gmp::mpz_int b = (state.s - state.gx*a)%p;
         _f.setB(b);

@@ -1,18 +1,17 @@
 #include "../config.h"
 #include "distance.h"
-#include <mutex>
 #include <algorithm>
 #include <functional>
 
 namespace pt = boost::property_tree;
 
-std::mutex mtx;
+std::mutex gmtx;
 
 void Distance::operator()(SearchState &state){
     uint8_t check = (uint8_t)(state.fd.getElement(_conf->getSearchSettings().index+checkoffset)%_conf->getPrintSettings().subfield);
-    
     gmp::mpz_int avar = state.fd.getA();
     {
+        std::mutex& mtx = locations_lock[check];
         std::lock_guard<std::mutex> printGuard(mtx);
         locations[check].push_back(avar);
         std::push_heap(locations[check].begin(), locations[check].end(), std::greater<gmp::mpz_int>());
@@ -34,8 +33,6 @@ void Distance::operator()(SearchState &state){
         }
     }
 }
-
-Action* Distance::clone(){ return new Distance(*this); }
 
 void Distance::load(pt::ptree &_tree){
     Action::load(_tree);

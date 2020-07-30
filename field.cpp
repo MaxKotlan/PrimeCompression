@@ -15,19 +15,19 @@ void Field::print(const PrintSettings &psettings) const{
 
 void Field::printDec(const PrintSettings &psettings) const{
     for (gmp::mpz_int i = psettings.offset; i < psettings.offset+psettings.range; i++)
-        std::cout << ((getElement(i)%psettings.subfield)+psettings.post_offset) << " ";
+        std::cout << ((getElement(i)%psettings.subfield)+psettings.post_offset) << psettings.separator;
     std::cout << (psettings.range==size()?"":"...") << std::endl;
 }
 
 void Field::printHex(const PrintSettings &psettings) const{
     for (gmp::mpz_int i = psettings.offset; i < psettings.offset+psettings.range; i++)
-        std::cout << std::setfill(' ') << std::setw( 2 ) << std::hex  << ((getElement(i)%psettings.subfield)+psettings.post_offset) << " ";
+        std::cout << std::setfill(' ') << std::setw( 2 ) << std::hex  << ((getElement(i)%psettings.subfield)+psettings.post_offset) << psettings.separator;
     std::cout << (psettings.range==size()?"":"...") << std::dec << std::endl;
 }
 
 void Field::printChar(const PrintSettings &psettings) const{
     for (gmp::mpz_int i = psettings.offset; i < psettings.offset+psettings.range; i++)
-        std::cout << (uint8_t)((getElement(i)%psettings.subfield)+psettings.post_offset) << " ";
+        std::cout << (uint8_t)((getElement(i)%psettings.subfield)+psettings.post_offset) << psettings.separator;
     std::cout << (psettings.range==size()?"":"...")<< std::endl;
 }
 

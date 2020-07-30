@@ -7,6 +7,7 @@
 namespace gmp = boost::multiprecision;
 
 struct PrintSettings{
+    std::string  separator=" ";
     gmp::mpz_int range=0;
     gmp::mpz_int offset=0;
     gmp::mpz_int post_offset=0;

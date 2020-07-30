@@ -1,11 +1,11 @@
 {
     "field":{
-        "generator": "499490918065850301921197603564081112780623690273420984342968690594064612108591217229304461006005170865294466527166368851",
-        "modulo": "32998886283809577512914881459957314326750856532546837122557861905096711274255431870995137546575954361422085081"
+        "generator": "35201546659608842026088328007565866231962578784643756647773109869245232364730066609837018108561065242031153677",
+        "modulo": "14083359469338511572632447718747493405040362318205860500297736061630222431052998057250747900577940212317413063"
     },
     "threadsettings": {
         "autodetect": true,
-        "threadcount": 10
+        "threadcount": 1
     },
     "searchsettings":{
         "a_offset":"0",
@@ -22,6 +22,11 @@
                         "halt":false
                     },
                     {
+                        "data": "MAX",
+                        "normalize":true,
+                        "halt":false
+                    },
+                    {
                         "data": "MKOT",
                         "normalize":true,
                         "halt":false
@@ -32,7 +37,7 @@
             },
             {
                 "name": "NonMatch",
-                "pollingrate": 1000000,
+                "pollingrate": 100000,
                 "enabled": false
             },
             {
@@ -42,14 +47,15 @@
             },
             {
                 "name": "Distance",
-                "pollingrate": 10000000,
+                "pollingrate": 100000000,
                 "printsize": 20,
                 "enabled": true
             }
         ]
     },
     "printsettings":{
-        "range":15,
+        "separator": "",
+        "range":180,
         "offset":"0",
         "post_offset": 65,
         "subfield": 26,

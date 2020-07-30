@@ -28,6 +28,7 @@ void Config::ReadThreadSettings(){
 
 void Config::ReadSearchSettings(){
     _searchsettings.a_offset = _tree.get<gmp::mpz_int>("searchsettings.a_offset", _searchsettings.a_offset);
+    _searchsettings.a_range  = _tree.get<gmp::mpz_int>("searchsettings.a_range",  _fieldparams.modulo);
     _searchsettings.index    = _tree.get<gmp::mpz_int>("searchsettings.index",       _searchsettings.index);
     _searchsettings.initalelement = _tree.get<std::string>("searchsettings.initalelement")[0];
     _searchsettings.initalelementnormalize = _tree.get<bool>("searchsettings.initalelementnormalize", _searchsettings.initalelementnormalize);
@@ -48,6 +49,7 @@ void Config::ReadSearchSettings(){
 }
 
 void Config::ReadPrintSettings(){
+    _printsettings.separator   = _tree.get<std::string>("printsettings.separator", _printsettings.separator);
     _printsettings.range       = _tree.get<gmp::mpz_int>("printsettings.range", _printsettings.range);
     _printsettings.offset      = _tree.get<gmp::mpz_int>("printsettings.offset", _printsettings.offset);
     _printsettings.post_offset = _tree.get<gmp::mpz_int>("printsettings.post_offset", _printsettings.post_offset);

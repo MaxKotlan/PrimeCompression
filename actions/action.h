@@ -24,7 +24,7 @@ class Action{
             std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(now - _prev_time).count() << "ms\t";
             _prev_time = now;
         }
-        virtual Action* clone()=0;
+
     protected:
         gmp::mpz_int _pollingrate=1;
         std::chrono::_V2::system_clock::time_point _prev_time;

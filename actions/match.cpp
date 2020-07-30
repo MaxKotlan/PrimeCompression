@@ -17,9 +17,6 @@ void Match::operator()(SearchState &ss){
     }
 }
 
-Action* Match::clone(){ return new Match(*this); }
-
-
 void Match::load(pt::ptree &_tree){
     Action::load(_tree);
     for (auto &targetprop : _tree.get_child("targets")){
